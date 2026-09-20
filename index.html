@@ -20,6 +20,27 @@
   --muted:#879987;
   --accent:#9caf93;
   --danger:#bd8b76;
+  --nav-bg:rgba(11,16,13,.94);
+  --card-bg:rgba(17,25,18,.9);
+  --input-bg:#0c120e;
+  --terminal-bg:#0d140f;
+}
+
+body.light{
+  --bg:#e9f3e4;
+  --panel:#f4f9f1;
+  --line:#a9c2a1;
+  --text:#233126;
+  --muted:#5e735f;
+  --accent:#315b38;
+  --nav-bg:rgba(233,243,228,.94);
+  --card-bg:rgba(244,249,241,.95);
+  --input-bg:#f7fbf5;
+  --terminal-bg:#f0f7ed;
+  --main:#5b8b58;
+  --deep:#467235;
+  --sub:#4f7c54;
+  --danger:#9a6558;
 }
 
 *{
@@ -101,7 +122,7 @@ nav{
   top:0;
   z-index:100;
 
-  background:rgba(11,16,13,.94);
+  background:var(--nav-bg);
 
   border-bottom:1px solid var(--line);
 
@@ -120,7 +141,7 @@ nav{
 
 .logo{
   font-weight:700;
-  color:#b8c8b2;
+  color:var(--accent);
   letter-spacing:1px;
   white-space:nowrap;
 }
@@ -146,7 +167,7 @@ nav{
 
 .nav-links a:hover,
 .nav-links a.active{
-  color:#e8f0e5;
+  color:var(--accent);
 
   border-color:var(--main);
 
@@ -282,7 +303,7 @@ h1{
 
   margin:0;
 
-  color:#e2eadf;
+  color:var(--text);
 
   text-shadow:
     4px 4px 0 rgba(70,114,53,.35);
@@ -309,7 +330,7 @@ h1{
 .lead{
   font-size:15px;
 
-  color:#aebca9;
+  color:var(--muted);
 
   margin:26px 0;
 
@@ -319,7 +340,7 @@ h1{
 .terminal{
   border:1px solid var(--line);
 
-  background:#0d140f;
+  background:var(--terminal-bg);
 
   padding:18px;
 
@@ -363,7 +384,7 @@ h2{
 
   margin:0 0 28px;
 
-  color:#dbe7d8;
+  color:var(--text);
 }
 
 .grid{
@@ -375,7 +396,7 @@ h2{
 }
 
 .card{
-  background:rgba(17,25,18,.9);
+  background:var(--card-bg);
 
   border:1px solid var(--line);
 
@@ -403,7 +424,7 @@ h2{
 
   font-size:15px;
 
-  color:#cbd8c8;
+  color:var(--text);
 }
 
 .card p{
@@ -463,7 +484,7 @@ h2{
 .big-memory{
   font-size:18px;
 
-  color:#d7e3d3;
+  color:var(--text);
 
   margin-bottom:16px;
 }
@@ -493,7 +514,7 @@ h2{
 
   border:1px dashed #536653;
 
-  background:#0b120d;
+  background:var(--input-bg);
 
   display:flex;
 
@@ -556,7 +577,7 @@ h2{
 .input,
 .select,
 .textarea{
-  background:#0c120e;
+  background:var(--input-bg);
 
   color:var(--text);
 
@@ -586,7 +607,7 @@ h2{
 
   background:rgba(70,114,53,.18);
 
-  color:#d8e4d5;
+  color:var(--text);
 
   padding:10px 13px;
 
@@ -758,7 +779,7 @@ h2{
 
   padding:24px;
 
-  background:#101810;
+  background:var(--card-bg);
 
   transition:.2s;
 }
@@ -796,6 +817,136 @@ footer{
 
 
 /* ==================================================
+   THEME TOGGLE
+================================================== */
+
+.theme-toggle{
+  border:1px solid var(--line);
+  background:rgba(70,114,53,.12);
+  color:var(--text);
+  padding:8px 10px;
+  font-size:11px;
+  white-space:nowrap;
+  transition:.2s;
+}
+.theme-toggle:hover{ border-color:var(--sub); background:rgba(70,114,53,.22); }
+
+body.light .theme-toggle{ background:rgba(70,114,53,.10); }
+
+body.light .terminal,
+body.light .card,
+body.light .contact-link,
+body.light .photo-box,
+body.light .input,
+body.light .select,
+body.light .textarea{
+  box-shadow:0 2px 12px rgba(53,88,54,.06);
+}
+
+body.light h1,
+body.light h2,
+body.light .card h3,
+body.light .big-memory{
+  text-shadow:none;
+}
+
+/* ==================================================
+   FOOD SUika GAME
+================================================== */
+
+.game-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:18px;
+  align-items:start;
+}
+.game-panel{
+  border:1px solid var(--line);
+  background:var(--card-bg);
+  padding:16px;
+}
+.game-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:12px;
+}
+.game-title{
+  color:var(--accent);
+  font-size:13px;
+}
+.game-score{
+  font-family:"Press Start 2P",monospace;
+  font-size:12px;
+  color:var(--text);
+}
+#suikaCanvas{
+  width:100%;
+  max-width:520px;
+  aspect-ratio:4/5;
+  display:block;
+  margin:0 auto;
+  border:2px solid var(--main);
+  background:linear-gradient(180deg,rgba(96,116,86,.10),rgba(70,114,53,.04));
+  touch-action:none;
+}
+.game-controls{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.game-help{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.8;
+}
+.food-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+.food-chip{
+  border:1px solid var(--line);
+  padding:9px;
+  font-size:11px;
+  background:rgba(70,114,53,.07);
+}
+.game-over{
+  position:fixed;
+  inset:0;
+  z-index:1200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,10,6,.72);
+  backdrop-filter:blur(5px);
+}
+.game-over.show{display:flex}
+.game-over-box{
+  width:min(420px,90%);
+  border:1px solid var(--main);
+  background:var(--card-bg);
+  padding:28px;
+  text-align:center;
+  box-shadow:10px 10px 0 rgba(70,114,53,.12);
+}
+.game-over-box h3{
+  margin:0 0 12px;
+  color:var(--text);
+  font-family:"Press Start 2P",monospace;
+  font-size:16px;
+  line-height:1.7;
+}
+.game-over-box p{color:var(--muted);font-size:12px}
+
+@media(max-width:760px){
+  .game-wrap{grid-template-columns:1fr}
+  .theme-toggle{order:2}
+}
+/* ==================================================
    MOBILE
 ================================================== */
 
@@ -803,8 +954,8 @@ footer{
 
   .nav-inner{
     min-height:62px;
-
     padding:10px 0;
+    flex-wrap:wrap;
   }
 
   .menu-toggle{
@@ -824,7 +975,7 @@ footer{
 
     gap:0;
 
-    background:rgba(11,16,13,.98);
+    background:var(--nav-bg);
 
     border-bottom:1px solid var(--line);
 
@@ -1092,15 +1243,24 @@ footer{
       </a>
 
       <a
+        href="#game"
+        data-page="game"
+      >
+        Game
+      </a>
+
+      <a
         href="#contact"
         data-page="contact"
       >
         Contact
       </a>
 
-    </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="테마 전환">
+        ☀ LIGHT
+      </button>
 
-  </div>
+    </div>
 
 </nav>
 
@@ -1150,10 +1310,12 @@ footer{
 
       <div class="terminal">
 
-        <b>
+        <b id="navigationLogsTrigger" class="typing-launch">
           &gt; NAVIGATION &amp; LOGS
         </b>
 
+        <br>
+        <span id="typingLaunchHint" class="typing-launch">=͟͟͞(๑˃̵ᴗ˂̵)و</span>
         <br><br>
 
         일상과 아이디어가 실시간으로 기록되는 데이터 로그
@@ -1829,6 +1991,56 @@ footer{
 
 
 <!-- ==================================================
+     FOOD GAME PAGE
+================================================== -->
+
+<section
+  class="page"
+  id="page-game"
+  data-page-content="game"
+>
+  <div class="container">
+    <div class="section-tag">// GAME ARCHIVE</div>
+    <h2>FOOD DROP // 수박게임</h2>
+
+    <div class="game-wrap">
+      <div class="game-panel">
+        <div class="game-head">
+          <div class="game-title">RAMEN KITCHEN // FOOD MERGE</div>
+          <div class="game-score">SCORE <span id="gameScore">0</span></div>
+        </div>
+        <canvas id="suikaCanvas" width="520" height="650"></canvas>
+        <div class="game-controls">
+          <button class="btn" id="restartGame" type="button">↻ RESTART</button>
+          <button class="btn" id="dropCenter" type="button">DROP CENTER</button>
+        </div>
+      </div>
+
+      <div class="game-panel">
+        <div class="label">HOW TO PLAY</div>
+        <p class="game-help">
+          마우스/터치로 좌우 위치를 정한 뒤 클릭하거나 터치하면 음식이 떨어집니다.<br><br>
+          같은 음식끼리 만나면 다음 단계 음식으로 합쳐집니다.<br>
+          바닥 밖으로 너무 많이 쌓이면 GAME OVER.
+        </p>
+
+        <div class="label" style="margin-top:20px">FOOD DATA</div>
+        <div class="food-list">
+          <div class="food-chip">🍥 진라면</div>
+          <div class="food-chip">🍜 너구리</div>
+          <div class="food-chip">🥢 신라면</div>
+          <div class="food-chip">🍲 김치라면</div>
+          <div class="food-chip">🍛 짜장라면</div>
+          <div class="food-chip">🍲 라볶이</div>
+          <div class="food-chip">🥘 떡볶이</div>
+          <div class="food-chip">🍉 수박</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
      CONTACT PAGE
 ================================================== -->
 
@@ -1962,6 +2174,7 @@ function getCurrentPage(){
     'growth',
     'play',
     'academic',
+    'game',
     'contact'
   ];
 
@@ -2040,6 +2253,9 @@ function showPage(pageName){
 
     academic:
       'HYOJIN.ZIP // ACADEMIC',
+
+    game:
+      'HYOJIN.ZIP // FOOD GAME',
 
     contact:
       'HYOJIN.ZIP // CONTACT'
@@ -2793,6 +3009,319 @@ function renderActivities(){
 
 }
 
+
+/* ==================================================
+   THEME
+================================================== */
+
+const themeToggle = document.getElementById('themeToggle');
+
+function applyTheme(theme){
+  document.body.classList.toggle('light', theme === 'light');
+  themeToggle.textContent = theme === 'light' ? '☾ DARK' : '☀ LIGHT';
+  themeToggle.setAttribute('aria-label', theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환');
+  localStorage.setItem('hyojin_theme', theme);
+}
+
+applyTheme(localStorage.getItem('hyojin_theme') || 'dark');
+
+themeToggle.addEventListener('click', () => {
+  applyTheme(document.body.classList.contains('light') ? 'dark' : 'light');
+});
+
+
+/* ==================================================
+   KOREAN TYPING GAME
+   NAVIGATION & LOGS 클릭 -> 게임 페이지로 이동 + 자동 시작
+================================================== */
+
+const typingTrigger = document.getElementById('navigationLogsTrigger');
+const typingHint = document.getElementById('typingLaunchHint');
+
+function openTypingGame(){
+  const gameText = [
+    '오늘의 기록을 한 줄씩 천천히 입력해보세요.',
+    '작은 아이디어도 데이터가 되면 나만의 기록이 됩니다.',
+    'HYOJIN ZIP에 새로운 로그를 저장했습니다.'
+  ];
+  const target = gameText[Math.floor(Math.random() * gameText.length)];
+
+  const overlay = document.createElement('div');
+  overlay.className = 'game-over show';
+  overlay.innerHTML = `
+    <div class="game-over-box" style="text-align:left">
+      <div class="label">KOREAN TYPING // NAVIGATION LOG</div>
+      <h3 style="font-size:14px">한글 타자 연습</h3>
+      <p>아래 문장을 그대로 입력하세요.</p>
+      <div class="terminal" style="margin:14px 0">${escapeHTML(target)}</div>
+      <input id="typingInput" class="input" style="width:100%" autocomplete="off" placeholder="여기에 입력">
+      <div id="typingStats" class="game-help" style="margin-top:12px">타자수: 0 · 오타율: 0%</div>
+      <button class="btn" id="closeTyping" type="button" style="margin-top:14px">CLOSE</button>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const input = overlay.querySelector('#typingInput');
+  const stats = overlay.querySelector('#typingStats');
+
+  input.focus();
+
+  input.addEventListener('input', () => {
+    const value = input.value;
+    let correct = 0;
+    const max = Math.min(value.length, target.length);
+    for(let i=0;i<max;i++){
+      if(value[i] === target[i]) correct++;
+    }
+    const errors = Math.max(0, value.length - correct);
+    const typoRate = value.length ? Math.round(errors / value.length * 100) : 0;
+    stats.textContent = `타자수: ${value.length} · 오타율: ${typoRate}%`;
+
+    if(value === target){
+      stats.textContent = `완료! 타자수: ${value.length} · 오타율: ${typoRate}%`;
+      input.disabled = true;
+    }
+  });
+
+  overlay.querySelector('#closeTyping').addEventListener('click', () => overlay.remove());
+}
+
+[typingTrigger, typingHint].forEach(el => {
+  if(!el) return;
+  el.addEventListener('click', openTypingGame);
+  el.style.cursor = 'pointer';
+  el.title = '클릭하면 한글 타자 연습이 열립니다.';
+});
+
+
+/* ==================================================
+   FOOD SUika GAME
+   음식(라면) 버전
+================================================== */
+
+const canvas = document.getElementById('suikaCanvas');
+const ctx = canvas ? canvas.getContext('2d') : null;
+const scoreEl = document.getElementById('gameScore');
+const restartBtn = document.getElementById('restartGame');
+const dropCenterBtn = document.getElementById('dropCenter');
+
+const foods = [
+  {name:'진라면', emoji:'🍥', radius:20, color:'#d5b58c'},
+  {name:'너구리', emoji:'🍜', radius:26, color:'#c99b65'},
+  {name:'신라면', emoji:'🥢', radius:33, color:'#b76d48'},
+  {name:'김치라면', emoji:'🍲', radius:41, color:'#b64d43'},
+  {name:'짜장라면', emoji:'🍛', radius:50, color:'#76593f'},
+  {name:'라볶이', emoji:'🍲', radius:60, color:'#a95843'},
+  {name:'떡볶이', emoji:'🥘', radius:70, color:'#c46b55'},
+  {name:'수박', emoji:'🍉', radius:82, color:'#789653'}
+];
+
+let foodPieces = [];
+let score = 0;
+let gameRunning = true;
+let dropX = canvas ? canvas.width / 2 : 260;
+let nextFood = 0;
+let lastTime = 0;
+let spawnCooldown = 0;
+let dragX = null;
+
+function resetGame(){
+  foodPieces = [];
+  score = 0;
+  gameRunning = true;
+  dropX = canvas.width / 2;
+  nextFood = Math.floor(Math.random() * 3);
+  scoreEl.textContent = score;
+  lastTime = performance.now();
+  spawnCooldown = 0;
+  requestAnimationFrame(gameLoop);
+}
+
+function spawnFood(x){
+  if(!gameRunning || spawnCooldown > 0) return;
+  const type = nextFood;
+  foodPieces.push({
+    x:Math.max(foods[type].radius, Math.min(canvas.width-foods[type].radius, x)),
+    y:foods[type].radius + 5,
+    vx:0,
+    vy:0,
+    type,
+    r:foods[type].radius,
+    settled:false
+  });
+  nextFood = Math.floor(Math.random() * Math.min(3, foods.length));
+  spawnCooldown = 380;
+}
+
+function mergeFoods(a,b,indexA,indexB){
+  if(a.type !== b.type || a.type >= foods.length - 1) return false;
+  const newType = a.type + 1;
+  const nx = (a.x+b.x)/2;
+  const ny = (a.y+b.y)/2;
+  foodPieces.splice(Math.max(indexA,indexB),1);
+  foodPieces.splice(Math.min(indexA,indexB),1);
+  foodPieces.push({
+    x:nx,y:ny,vx:0,vy:-1.5,type:newType,
+    r:foods[newType].radius,settled:false
+  });
+  score += (newType + 1) * 10;
+  scoreEl.textContent = score;
+  return true;
+}
+
+function updatePhysics(dt){
+  spawnCooldown = Math.max(0, spawnCooldown - dt);
+
+  for(const p of foodPieces){
+    p.vy += 0.0018 * dt;
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+
+    if(p.x-p.r < 0){ p.x=p.r; p.vx *= -0.35; }
+    if(p.x+p.r > canvas.width){ p.x=canvas.width-p.r; p.vx *= -0.35; }
+
+    const floor = canvas.height - p.r - 5;
+    if(p.y > floor){
+      p.y=floor;
+      p.vy *= -0.18;
+      p.vx *= 0.92;
+      if(Math.abs(p.vy) < 0.05) p.vy=0;
+    }
+  }
+
+  // simple iterative circle collision / merging
+  for(let pass=0; pass<2; pass++){
+    for(let i=0;i<foodPieces.length;i++){
+      for(let j=i+1;j<foodPieces.length;j++){
+        const a=foodPieces[i], b=foodPieces[j];
+        const dx=b.x-a.x, dy=b.y-a.y;
+        const dist=Math.hypot(dx,dy) || 0.001;
+        const minDist=a.r+b.r;
+
+        if(dist < minDist){
+          if(a.type===b.type && a.type<foods.length-1){
+            mergeFoods(a,b,i,j);
+            return;
+          }
+          const nx=dx/dist, ny=dy/dist;
+          const overlap=minDist-dist;
+          a.x -= nx*overlap/2; a.y -= ny*overlap/2;
+          b.x += nx*overlap/2; b.y += ny*overlap/2;
+          const impulse=0.025;
+          a.vx -= nx*impulse; a.vy -= ny*impulse;
+          b.vx += nx*impulse; b.vy += ny*impulse;
+        }
+      }
+    }
+  }
+
+  // game over if food reaches the danger line and is not moving
+  for(const p of foodPieces){
+    if(p.y-p.r < 52 && Math.abs(p.vy)<0.08 && p.y > 55){
+      gameRunning=false;
+      showGameOver();
+      break;
+    }
+  }
+}
+
+function drawGame(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const light = document.body.classList.contains('light');
+  ctx.fillStyle = light ? '#edf6e9' : '#0d140f';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // danger line
+  ctx.strokeStyle = light ? '#769d71' : '#5f785e';
+  ctx.setLineDash([7,7]);
+  ctx.beginPath();
+  ctx.moveTo(0,55);
+  ctx.lineTo(canvas.width,55);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = light ? '#557a55' : '#8ca487';
+  ctx.font = '11px "JetBrains Mono"';
+  ctx.fillText('DROP ZONE',12,20);
+  ctx.fillText(`NEXT: ${foods[nextFood].emoji} ${foods[nextFood].name}`,12,39);
+
+  for(const p of foodPieces){
+    const f=foods[p.type];
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=f.color;
+    ctx.fill();
+    ctx.strokeStyle=light ? '#35563a' : '#a4b99e';
+    ctx.lineWidth=2;
+    ctx.stroke();
+
+    ctx.font=`${Math.max(18,p.r*0.78)}px "Segoe UI Emoji","Apple Color Emoji",sans-serif`;
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(f.emoji,p.x,p.y-2);
+
+    ctx.font=`${Math.max(8,Math.min(12,p.r/5))}px "JetBrains Mono"`;
+    ctx.fillStyle=light ? '#263829' : '#e5eee2';
+    ctx.fillText(f.name,p.x,p.y+p.r*0.62);
+  }
+  ctx.textAlign='left';
+  ctx.textBaseline='alphabetic';
+
+  // aiming guide
+  if(gameRunning){
+    ctx.strokeStyle=light ? 'rgba(53,91,55,.35)' : 'rgba(171,193,164,.22)';
+    ctx.setLineDash([3,5]);
+    ctx.beginPath();
+    ctx.moveTo(dropX,50);
+    ctx.lineTo(dropX,canvas.height-20);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function gameLoop(now){
+  if(!canvas) return;
+  const dt=Math.min(32, now-lastTime || 16);
+  lastTime=now;
+  if(gameRunning) updatePhysics(dt);
+  drawGame();
+  if(gameRunning) requestAnimationFrame(gameLoop);
+}
+
+function showGameOver(){
+  if(document.getElementById('foodGameOver')) return;
+  const overlay=document.createElement('div');
+  overlay.className='game-over show';
+  overlay.id='foodGameOver';
+  overlay.innerHTML=`
+    <div class="game-over-box">
+      <div class="label">FOOD MERGE SYSTEM // STOPPED</div>
+      <h3>GAME OVER</h3>
+      <p>최종 점수: <strong>${score}</strong></p>
+      <button class="btn" id="foodRestart" type="button">↻ 다시 시작</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.querySelector('#foodRestart').addEventListener('click',()=>{
+    overlay.remove();
+    resetGame();
+  });
+}
+
+if(canvas){
+  const setPointer = (event)=>{
+    const rect=canvas.getBoundingClientRect();
+    const clientX=event.touches ? event.touches[0].clientX : event.clientX;
+    dropX=(clientX-rect.left)*(canvas.width/rect.width);
+  };
+  canvas.addEventListener('mousemove',setPointer);
+  canvas.addEventListener('click',()=>spawnFood(dropX));
+  canvas.addEventListener('touchmove',event=>{ event.preventDefault(); setPointer(event); },{passive:false});
+  canvas.addEventListener('touchstart',event=>{ setPointer(event); },{passive:true});
+  canvas.addEventListener('touchend',()=>spawnFood(dropX),{passive:true});
+  restartBtn.addEventListener('click',resetGame);
+  dropCenterBtn.addEventListener('click',()=>spawnFood(canvas.width/2));
+  resetGame();
+}
 
 /* ==================================================
    HTML ESCAPE
