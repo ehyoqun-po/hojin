@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>HYOJIN.ZIP // SYSTEM ARCHIVE</title>
 
 <style>
@@ -32,11 +33,24 @@ html{
 body{
   margin:0;
   background:
-    radial-gradient(circle at 20% 10%,rgba(70,114,53,.12),transparent 25%),
-    linear-gradient(rgba(96,116,86,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(96,116,86,.025) 1px,transparent 1px),
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(70,114,53,.12),
+      transparent 25%
+    ),
+    linear-gradient(
+      rgba(96,116,86,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(96,116,86,.025) 1px,
+      transparent 1px
+    ),
     var(--bg);
+
   background-size:auto,24px 24px,24px 24px;
+
   color:var(--text);
   font-family:"JetBrains Mono",monospace;
 }
@@ -46,12 +60,14 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
+
   background:repeating-linear-gradient(
     0deg,
     transparent 0 3px,
     rgba(255,255,255,.012) 4px
   );
-  z-index:20;
+
+  z-index:999;
 }
 
 a{
@@ -76,24 +92,29 @@ button{
 }
 
 
-/* =========================
+/* ==================================================
    NAVIGATION
-========================= */
+================================================== */
 
 nav{
   position:sticky;
   top:0;
   z-index:100;
+
   background:rgba(11,16,13,.94);
+
   border-bottom:1px solid var(--line);
+
   backdrop-filter:blur(10px);
 }
 
 .nav-inner{
   min-height:62px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:20px;
 }
 
@@ -113,34 +134,49 @@ nav{
 
 .nav-links a{
   padding:9px 11px;
+
   color:var(--muted);
+
   font-size:12px;
+
   border:1px solid transparent;
+
+  transition:.2s;
 }
 
 .nav-links a:hover,
 .nav-links a.active{
   color:#e8f0e5;
+
   border-color:var(--main);
+
   background:rgba(70,114,53,.16);
 }
 
 
-/* =========================
+/* ==================================================
    HAMBURGER
-========================= */
+================================================== */
 
 .menu-toggle{
   display:none;
+
   width:42px;
   height:42px;
+
   padding:8px;
+
   border:1px solid var(--line);
+
   background:rgba(70,114,53,.12);
+
   color:var(--text);
+
   align-items:center;
   justify-content:center;
+
   flex-direction:column;
+
   gap:5px;
 }
 
@@ -151,12 +187,13 @@ nav{
 
 .menu-toggle span{
   display:block;
+
   width:20px;
   height:2px;
+
   background:var(--accent);
-  transition:
-    transform .25s ease,
-    opacity .25s ease;
+
+  transition:.25s;
 }
 
 .menu-toggle.active span:nth-child(1){
@@ -172,37 +209,83 @@ nav{
 }
 
 
-/* =========================
+/* ==================================================
+   PAGE SYSTEM
+================================================== */
+
+.page{
+  display:none;
+
+  min-height:calc(100vh - 62px);
+
+  animation:pageIn .35s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+/* ==================================================
    HERO
-========================= */
+================================================== */
 
 .hero{
-  padding:90px 0 65px;
+  min-height:calc(100vh - 62px);
+
+  display:flex;
+  align-items:center;
+
+  padding:80px 0;
+
   border-bottom:1px dashed var(--line);
 }
 
 .status{
   font-size:11px;
   color:var(--sub);
+
   margin-bottom:22px;
 }
 
 .status span{
   display:inline-block;
+
   width:8px;
   height:8px;
+
   background:var(--sub);
+
   box-shadow:0 0 12px var(--sub);
+
   margin-right:8px;
 }
 
 h1{
   font-family:"Press Start 2P",monospace;
+
   font-size:clamp(28px,6vw,68px);
+
   line-height:1.35;
+
   margin:0;
+
   color:#e2eadf;
-  text-shadow:4px 4px 0 rgba(70,114,53,.35);
+
+  text-shadow:
+    4px 4px 0 rgba(70,114,53,.35);
 }
 
 .glitch{
@@ -212,26 +295,40 @@ h1{
 
 .glitch:after{
   content:"";
+
   position:absolute;
+
   left:3px;
   top:3px;
+
   color:var(--sub);
+
   z-index:-1;
 }
 
 .lead{
   font-size:15px;
+
   color:#aebca9;
+
   margin:26px 0;
+
   line-height:1.9;
 }
 
 .terminal{
   border:1px solid var(--line);
+
   background:#0d140f;
+
   padding:18px;
-  box-shadow:8px 8px 0 rgba(70,114,53,.08);
+
+  box-shadow:
+    8px 8px 0 rgba(70,114,53,.08);
+
   font-size:12px;
+
+  line-height:1.8;
 }
 
 .terminal b{
@@ -239,141 +336,183 @@ h1{
 }
 
 
-/* =========================
-   SECTIONS
-========================= */
+/* ==================================================
+   SECTION
+================================================== */
 
 section{
   padding:82px 0;
+
   border-bottom:1px dashed var(--line);
 }
 
 .section-tag{
   color:var(--sub);
+
   font-size:11px;
+
   margin-bottom:12px;
 }
 
 h2{
   font-family:"Press Start 2P",monospace;
+
   font-size:20px;
+
   line-height:1.6;
+
   margin:0 0 28px;
+
   color:#dbe7d8;
 }
 
 .grid{
   display:grid;
+
   grid-template-columns:repeat(2,1fr);
+
   gap:18px;
 }
 
 .card{
   background:rgba(17,25,18,.9);
+
   border:1px solid var(--line);
+
   padding:24px;
+
   position:relative;
 }
 
 .card:before{
   content:"";
+
   position:absolute;
+
   top:0;
   left:0;
+
   width:42px;
   height:3px;
+
   background:var(--main);
 }
 
 .card h3{
   margin:0 0 14px;
+
   font-size:15px;
+
   color:#cbd8c8;
 }
 
 .card p{
   color:var(--muted);
+
   font-size:13px;
+
   line-height:1.8;
+
   margin:0;
 }
 
 
-/* =========================
+/* ==================================================
    PROFILE
-========================= */
+================================================== */
 
 .profile-box{
   display:grid;
+
   grid-template-columns:180px 1fr;
+
   gap:24px;
+
   align-items:stretch;
 }
 
 .id-box{
   border:1px solid var(--line);
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  min-height:220px;
-  background:linear-gradient(
-    135deg,
-    rgba(96,116,86,.15),
-    transparent
-  );
-}
 
-.pixel-face{
-  font-size:48px;
-  letter-spacing:-10px;
-  color:var(--main);
-  text-align:center;
-  padding:20px 0;
+  padding:20px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  min-height:220px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(96,116,86,.15),
+      transparent
+    );
 }
 
 .label{
   color:var(--sub);
+
   font-size:10px;
+
   margin-bottom:8px;
 }
 
 .big-memory{
   font-size:18px;
+
   color:#d7e3d3;
+
   margin-bottom:16px;
 }
 
 .progress{
   height:8px;
+
   border:1px solid var(--line);
+
   padding:1px;
+
   margin-bottom:18px;
 }
 
 .progress i{
   display:block;
+
   height:100%;
+
   width:78%;
+
   background:var(--main);
 }
 
 .photo-box{
   height:145px;
+
   border:1px dashed #536653;
+
   background:#0b120d;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
+
   cursor:pointer;
+
   margin:8px 0 10px;
 }
 
 .photo-box img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:none;
 }
 
@@ -383,115 +522,48 @@ h2{
 
 #photoPlaceholder{
   color:#667866;
+
   font-family:"Press Start 2P",monospace;
+
   font-size:10px;
+
   line-height:2;
+
   text-align:center;
 }
 
 .photo-actions{
   display:flex;
+
   gap:6px;
+
   margin-bottom:16px;
 }
 
 .small{
   font-size:9px;
+
   padding:7px 8px;
+
   display:inline-block;
 }
 
 
-/* =========================
-   SKILLS
-========================= */
-
-.skill{
-  margin:16px 0;
-}
-
-.skill-head{
-  display:flex;
-  justify-content:space-between;
-  font-size:11px;
-  color:#aab9a5;
-  margin-bottom:7px;
-}
-
-.bar{
-  height:7px;
-  background:#1b261d;
-  border:1px solid var(--line);
-}
-
-.bar i{
-  display:block;
-  height:100%;
-  background:var(--sub);
-}
-
-
-/* =========================
-   GROWTH
-========================= */
-
-.timeline{
-  position:relative;
-  margin:15px 0 30px;
-  padding-left:28px;
-  border-left:1px solid var(--line);
-}
-
-.year-item{
-  margin:0 0 18px;
-  position:relative;
-}
-
-.year-item:before{
-  content:"";
-  position:absolute;
-  left:-33px;
-  top:6px;
-  width:8px;
-  height:8px;
-  background:var(--sub);
-  box-shadow:
-    0 0 0 3px var(--bg),
-    0 0 0 4px var(--line);
-}
-
-.year-item h3{
-  margin:0 0 7px;
-  font-size:14px;
-  color:#d6e1d2;
-}
-
-.year-item p{
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-}
-
-
-/* =========================
+/* ==================================================
    FORM
-========================= */
-
-.toolbar{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-}
+================================================== */
 
 .input,
 .select,
 .textarea{
   background:#0c120e;
+
   color:var(--text);
+
   border:1px solid var(--line);
+
   padding:11px;
+
   outline:none;
 }
 
@@ -503,15 +575,22 @@ h2{
 
 .textarea{
   width:100%;
+
   min-height:90px;
+
   resize:vertical;
 }
 
 .btn{
   border:1px solid var(--main);
+
   background:rgba(70,114,53,.18);
+
   color:#d8e4d5;
+
   padding:10px 13px;
+
+  transition:.2s;
 }
 
 .btn:hover{
@@ -520,13 +599,17 @@ h2{
 
 .btn.danger{
   border-color:#725247;
+
   color:#d3aaa0;
 }
 
 .form{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10px;
+
   margin-bottom:22px;
 }
 
@@ -535,66 +618,13 @@ h2{
 }
 
 
-/* =========================
-   ACTIVITY
-========================= */
-
-.activity{
-  display:flex;
-  justify-content:space-between;
-  gap:18px;
-  border-top:1px solid var(--line);
-  padding:16px 0;
-}
-
-.activity h4{
-  margin:0 0 7px;
-  font-size:13px;
-}
-
-.activity p{
-  margin:0;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6;
-}
-
-.empty{
-  color:#687668;
-  font-size:12px;
-  padding:20px 0;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.contact-link{
-  display:block;
-  border:1px solid var(--line);
-  padding:24px;
-  background:#101810;
-}
-
-.contact-link:hover{
-  border-color:var(--sub);
-  transform:translateY(-2px);
-}
-
-
-/* =========================
+/* ==================================================
    MEMORY
-========================= */
+================================================== */
 
 .memory-form{
   display:flex;
+
   gap:7px;
 }
 
@@ -604,20 +634,42 @@ h2{
 
 .memory-item{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:8px;
+
   border-bottom:1px solid #283528;
+
   padding:9px 0;
+
   font-size:11px;
+
   color:#aab9a5;
 }
 
 .memory-item button{
   background:none;
+
   border:0;
+
   color:#80665d;
 }
+
+.empty{
+  color:#687668;
+
+  font-size:12px;
+
+  padding:20px 0;
+}
+
+
+/* ==================================================
+   PROJECT / HASHTAG
+================================================== */
 
 .editable-card .textarea{
   margin-top:10px;
@@ -641,22 +693,94 @@ h2{
 
 .tag{
   display:inline-block;
+
   border:1px solid #466044;
+
   color:#9daf99;
+
   padding:4px 7px;
+
   font-size:10px;
+
   margin:5px 4px 0 0;
 }
 
 
-/* =========================
+/* ==================================================
+   ACTIVITY
+================================================== */
+
+.activity{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:18px;
+
+  border-top:1px solid var(--line);
+
+  padding:16px 0;
+}
+
+.activity h4{
+  margin:0 0 7px;
+
+  font-size:13px;
+}
+
+.activity p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.6;
+}
+
+
+/* ==================================================
+   CONTACT
+================================================== */
+
+.contact{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:18px;
+}
+
+.contact-link{
+  display:block;
+
+  border:1px solid var(--line);
+
+  padding:24px;
+
+  background:#101810;
+
+  transition:.2s;
+}
+
+.contact-link:hover{
+  border-color:var(--sub);
+
+  transform:translateY(-2px);
+}
+
+
+/* ==================================================
    FOOTER
-========================= */
+================================================== */
 
 footer{
   padding:35px 0 50px;
+
   color:#617060;
+
   font-size:11px;
+
   text-align:center;
 }
 
@@ -671,38 +795,43 @@ footer{
 }
 
 
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media(max-width:760px){
 
   .nav-inner{
     min-height:62px;
+
     padding:10px 0;
   }
 
-  /* 모바일에서는 햄버거 표시 */
   .menu-toggle{
     display:flex;
   }
 
-  /* 모바일에서는 메뉴 기본적으로 숨김 */
   .nav-links{
     position:absolute;
+
     top:62px;
     left:0;
     right:0;
 
     display:flex;
+
     flex-direction:column;
+
     gap:0;
 
     background:rgba(11,16,13,.98);
+
     border-bottom:1px solid var(--line);
 
     max-height:0;
+
     overflow:hidden;
+
     opacity:0;
 
     transition:
@@ -710,29 +839,37 @@ footer{
       opacity .2s ease;
   }
 
-  /* 햄버거 클릭 시 메뉴 열림 */
   .nav-links.open{
     max-height:500px;
+
     opacity:1;
   }
 
   .nav-links a{
     width:100%;
+
     padding:16px 5%;
+
     border:0;
+
     border-top:1px solid rgba(53,71,53,.5);
+
     font-size:12px;
   }
 
   .nav-links a:hover,
   .nav-links a.active{
     background:rgba(70,114,53,.16);
+
     border-color:transparent;
+
     padding-left:calc(5% + 5px);
   }
 
   .hero{
-    padding:65px 0 45px;
+    min-height:calc(100vh - 62px);
+
+    padding:60px 0;
   }
 
   .grid,
@@ -772,16 +909,25 @@ footer{
 
   .photo-actions .btn{
     flex:1;
+
     text-align:center;
   }
+
 }
 
 
-/* 아주 작은 휴대폰 */
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
 @media(max-width:400px){
 
   h1{
     font-size:25px;
+  }
+
+  h2{
+    font-size:14px;
   }
 
   .lead{
@@ -790,107 +936,261 @@ footer{
 
   .terminal{
     font-size:10px;
-    line-height:1.8;
-  }
-
-  h2{
-    font-size:14px;
   }
 
   .card{
     padding:18px;
   }
+
 }
+
+
+/* ==================================================
+   PAGE LOADER
+================================================== */
+
+.page-loader{
+  position:fixed;
+
+  inset:0;
+
+  background:var(--bg);
+
+  z-index:1000;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  pointer-events:none;
+
+  opacity:0;
+
+  transition:.25s;
+}
+
+.page-loader.show{
+  opacity:1;
+}
+
+.loader-text{
+  color:var(--sub);
+
+  font-size:11px;
+
+  text-align:center;
+
+  line-height:2;
+}
+
 </style>
 </head>
 
 
 <body>
 
-<!-- =========================
+
+<!-- ==================================================
+     PAGE LOADER
+================================================== -->
+
+<div class="page-loader" id="pageLoader">
+
+  <div class="loader-text">
+
+    [ SYSTEM LOADING ]<br>
+
+    <span class="cursor">_</span>
+
+  </div>
+
+</div>
+
+
+<!-- ==================================================
      NAVIGATION
-========================= -->
+================================================== -->
 
 <nav>
+
   <div class="container nav-inner">
 
-    <a class="logo" href="#home">
+    <a
+      class="logo"
+      href="#home"
+      data-page="home"
+    >
       HYOJIN.ZIP
     </a>
 
-    <!-- 모바일 햄버거 버튼 -->
+
+    <!-- MOBILE HAMBURGER -->
+
     <button
       class="menu-toggle"
       id="menuToggle"
+      type="button"
       aria-label="메뉴 열기"
       aria-expanded="false"
-      type="button"
     >
+
       <span></span>
       <span></span>
       <span></span>
+
     </button>
 
-    <div class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#profile">Profile</a>
-      <a href="#projects">Projects/Skills</a>
-      <a href="#growth">Growth</a>
-      <a href="#play">Play Lab</a>
-      <a href="#academic">Academic</a>
-      <a href="#contact">Contact</a>
+
+    <!-- NAV LINKS -->
+
+    <div
+      class="nav-links"
+      id="navLinks"
+    >
+
+      <a
+        href="#home"
+        data-page="home"
+      >
+        Home
+      </a>
+
+      <a
+        href="#profile"
+        data-page="profile"
+      >
+        Profile
+      </a>
+
+      <a
+        href="#projects"
+        data-page="projects"
+      >
+        Projects/Skills
+      </a>
+
+      <a
+        href="#growth"
+        data-page="growth"
+      >
+        Growth
+      </a>
+
+      <a
+        href="#play"
+        data-page="play"
+      >
+        Play Lab
+      </a>
+
+      <a
+        href="#academic"
+        data-page="academic"
+      >
+        Academic
+      </a>
+
+      <a
+        href="#contact"
+        data-page="contact"
+      >
+        Contact
+      </a>
+
     </div>
 
   </div>
+
 </nav>
 
 
+<!-- ==================================================
+     HOME PAGE
+================================================== -->
+
 <main>
 
-<!-- =========================
-     HOME
-========================= -->
+<section
+  class="page"
+  id="page-home"
+  data-page-content="home"
+>
 
-<section id="home" class="hero">
-  <div class="container">
+  <div class="hero">
 
-    <div class="status">
-      <span></span>
-      SYSTEM ONLINE // ARCHIVE NODE 01 // ACCESS GRANTED
-    </div>
+    <div class="container">
 
-    <h1 class="glitch">
-      HYOJIN_<br>
-      SYSTEM.EXE
-    </h1>
+      <div class="status">
 
-    <p class="lead">
-      효진의 아카이브 서버에 접속했습니다.
-    </p>
+        <span></span>
 
-    <div class="terminal">
-      <b>&gt; NAVIGATION &amp; LOGS</b>
-      <br><br>
+        SYSTEM ONLINE //
+        ARCHIVE NODE 01 //
+        ACCESS GRANTED
 
-      일상과 아이디어가 실시간으로 기록되는 데이터 로그
-      <br>
+      </div>
 
-      <span style="color:#687868">
-        &gt; profile / projects / growth / play_lab / contact
-      </span>
 
-      <span class="cursor">_</span>
+      <h1 class="glitch">
+
+        HYOJIN_<br>
+
+        SYSTEM.EXE
+
+      </h1>
+
+
+      <p class="lead">
+
+        효진의 아카이브 서버에 접속했습니다.
+
+      </p>
+
+
+      <div class="terminal">
+
+        <b>
+          &gt; NAVIGATION &amp; LOGS
+        </b>
+
+        <br><br>
+
+        일상과 아이디어가 실시간으로 기록되는 데이터 로그
+
+        <br>
+
+        <span style="color:#687868">
+
+          &gt; profile /
+          projects /
+          growth /
+          play_lab /
+          academic /
+          contact
+
+        </span>
+
+        <span class="cursor">_</span>
+
+      </div>
+
     </div>
 
   </div>
+
 </section>
 
 
-<!-- =========================
-     PROFILE
-========================= -->
+<!-- ==================================================
+     PROFILE PAGE
+================================================== -->
 
-<section id="profile">
+<section
+  class="page"
+  id="page-profile"
+  data-page-content="profile"
+>
 
   <div class="container">
 
@@ -898,9 +1198,15 @@ footer{
       // USER PROFILE
     </div>
 
-    <h2>ID: 효진</h2>
+    <h2>
+      ID: 효진
+    </h2>
+
 
     <div class="profile-box">
+
+
+      <!-- PROFILE ID -->
 
       <div class="id-box">
 
@@ -908,7 +1214,11 @@ footer{
           PERSONAL_NODE
         </div>
 
-        <label class="photo-box" for="profilePhoto">
+
+        <label
+          class="photo-box"
+          for="profilePhoto"
+        >
 
           <img
             id="profilePreview"
@@ -916,19 +1226,22 @@ footer{
           >
 
           <span id="photoPlaceholder">
+
             PHOTO<br>
             UPLOAD
+
           </span>
 
         </label>
+
 
         <input
           id="profilePhoto"
           type="file"
           accept="image/*"
           hidden
-          onchange="loadProfilePhoto(event)"
         >
+
 
         <div class="photo-actions">
 
@@ -941,13 +1254,14 @@ footer{
 
           <button
             class="btn small danger"
-            onclick="removeProfilePhoto()"
+            id="removePhoto"
             type="button"
           >
             REMOVE
           </button>
 
         </div>
+
 
         <div class="label">
           STATUS: ONLINE
@@ -956,6 +1270,8 @@ footer{
       </div>
 
 
+      <!-- MEMORY -->
+
       <div class="card">
 
         <div class="label">
@@ -963,12 +1279,16 @@ footer{
         </div>
 
         <div class="big-memory">
+
           나만의 기억 데이터를 직접 기록하는 공간.
+
         </div>
+
 
         <div class="progress">
           <i></i>
         </div>
+
 
         <div class="memory-form">
 
@@ -980,13 +1300,14 @@ footer{
 
           <button
             class="btn"
-            onclick="addMemory()"
+            id="addMemoryButton"
             type="button"
           >
             + ADD
           </button>
 
         </div>
+
 
         <div
           class="label"
@@ -995,10 +1316,15 @@ footer{
           MY MEMORY DATA
         </div>
 
+
         <div id="memoryList"></div>
 
+
         <p style="margin-top:22px">
-          기억하고 싶은 취향과 일상의 조각을 자유롭게 저장해보세요.
+
+          기억하고 싶은 취향과 일상의 조각을
+          자유롭게 저장해보세요.
+
         </p>
 
       </div>
@@ -1010,11 +1336,15 @@ footer{
 </section>
 
 
-<!-- =========================
-     PROJECTS
-========================= -->
+<!-- ==================================================
+     PROJECTS PAGE
+================================================== -->
 
-<section id="projects">
+<section
+  class="page"
+  id="page-projects"
+  data-page-content="projects"
+>
 
   <div class="container">
 
@@ -1026,7 +1356,11 @@ footer{
       BUILD / CREATE / DEBUG
     </h2>
 
+
     <div class="grid">
+
+
+      <!-- PROJECT 01 -->
 
       <div class="card editable-card">
 
@@ -1044,16 +1378,16 @@ footer{
           placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"
         ></textarea>
 
+
         <div class="hashtag-area">
 
           <input
             class="input hashtag-input"
-            placeholder="#키워드 입력 (예: #HTML)"
+            placeholder="#키워드 입력"
           >
 
           <button
-            class="btn"
-            onclick="addHashtag(this)"
+            class="btn hashtag-button"
             type="button"
           >
             + KEYWORD
@@ -1065,6 +1399,8 @@ footer{
 
       </div>
 
+
+      <!-- PROJECT 02 -->
 
       <div class="card editable-card">
 
@@ -1082,6 +1418,7 @@ footer{
           placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"
         ></textarea>
 
+
         <div class="hashtag-area">
 
           <input
@@ -1090,8 +1427,7 @@ footer{
           >
 
           <button
-            class="btn"
-            onclick="addHashtag(this)"
+            class="btn hashtag-button"
             type="button"
           >
             + KEYWORD
@@ -1103,6 +1439,8 @@ footer{
 
       </div>
 
+
+      <!-- PROJECT 03 -->
 
       <div class="card editable-card">
 
@@ -1120,6 +1458,7 @@ footer{
           placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"
         ></textarea>
 
+
         <div class="hashtag-area">
 
           <input
@@ -1128,8 +1467,7 @@ footer{
           >
 
           <button
-            class="btn"
-            onclick="addHashtag(this)"
+            class="btn hashtag-button"
             type="button"
           >
             + KEYWORD
@@ -1141,6 +1479,8 @@ footer{
 
       </div>
 
+
+      <!-- PROJECT 04 -->
 
       <div class="card editable-card">
 
@@ -1158,6 +1498,7 @@ footer{
           placeholder="내용을 자유롭게 입력"
         ></textarea>
 
+
         <div class="hashtag-area">
 
           <input
@@ -1166,8 +1507,7 @@ footer{
           >
 
           <button
-            class="btn"
-            onclick="addHashtag(this)"
+            class="btn hashtag-button"
             type="button"
           >
             + KEYWORD
@@ -1186,11 +1526,15 @@ footer{
 </section>
 
 
-<!-- =========================
-     GROWTH
-========================= -->
+<!-- ==================================================
+     GROWTH PAGE
+================================================== -->
 
-<section id="growth">
+<section
+  class="page"
+  id="page-growth"
+  data-page-content="growth"
+>
 
   <div class="container">
 
@@ -1202,12 +1546,16 @@ footer{
       GROWTH_LOG
     </h2>
 
+
     <div class="card">
 
       <p style="margin-bottom:20px">
+
         연도별 성장 기록과 활동을 직접 추가할 수 있습니다.
         저장된 내용은 이 브라우저의 LocalStorage에 보관됩니다.
+
       </p>
+
 
       <div class="form">
 
@@ -1218,17 +1566,21 @@ footer{
           placeholder="년도 (예: 2026)"
         >
 
+
         <select
           id="category"
           class="select"
         >
+
           <option>학교</option>
           <option>동아리</option>
           <option>외부활동</option>
           <option>프로젝트</option>
           <option>대회</option>
           <option>기타</option>
+
         </select>
+
 
         <input
           id="title"
@@ -1236,21 +1588,24 @@ footer{
           placeholder="활동 제목"
         >
 
+
         <textarea
           id="memo"
           class="textarea full"
           placeholder="활동 내용 / 느낀 점 / 배운 점을 자유롭게 기록"
         ></textarea>
 
+
         <button
           class="btn full"
-          onclick="addActivity()"
+          id="addActivityButton"
           type="button"
         >
           + ADD TO ARCHIVE
         </button>
 
       </div>
+
 
       <div id="activityList"></div>
 
@@ -1261,11 +1616,15 @@ footer{
 </section>
 
 
-<!-- =========================
-     PLAY LAB
-========================= -->
+<!-- ==================================================
+     PLAY LAB PAGE
+================================================== -->
 
-<section id="play">
+<section
+  class="page"
+  id="page-play"
+  data-page-content="play"
+>
 
   <div class="container">
 
@@ -1277,10 +1636,15 @@ footer{
       OFFLINE_DATA / ONLINE_MOOD
     </h2>
 
+
     <div class="grid">
 
+
       <div class="card editable-card">
-        <div class="label">PLAY DATA 01</div>
+
+        <div class="label">
+          PLAY DATA 01
+        </div>
 
         <input
           class="input full"
@@ -1291,11 +1655,15 @@ footer{
           class="textarea"
           placeholder="내가 직접 기록하고 싶은 내용"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">PLAY DATA 02</div>
+
+        <div class="label">
+          PLAY DATA 02
+        </div>
 
         <input
           class="input full"
@@ -1306,11 +1674,15 @@ footer{
           class="textarea"
           placeholder="내가 직접 기록하고 싶은 내용"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">PLAY DATA 03</div>
+
+        <div class="label">
+          PLAY DATA 03
+        </div>
 
         <input
           class="input full"
@@ -1321,11 +1693,15 @@ footer{
           class="textarea"
           placeholder="내가 직접 기록하고 싶은 내용"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">PLAY DATA 04</div>
+
+        <div class="label">
+          PLAY DATA 04
+        </div>
 
         <input
           class="input full"
@@ -1336,6 +1712,7 @@ footer{
           class="textarea"
           placeholder="내가 직접 기록하고 싶은 내용"
         ></textarea>
+
       </div>
 
     </div>
@@ -1345,11 +1722,15 @@ footer{
 </section>
 
 
-<!-- =========================
-     ACADEMIC
-========================= -->
+<!-- ==================================================
+     ACADEMIC PAGE
+================================================== -->
 
-<section id="academic">
+<section
+  class="page"
+  id="page-academic"
+  data-page-content="academic"
+>
 
   <div class="container">
 
@@ -1361,10 +1742,15 @@ footer{
       STUDY / SCHOOL LOG
     </h2>
 
+
     <div class="grid">
 
+
       <div class="card editable-card">
-        <div class="label">ACADEMIC 01</div>
+
+        <div class="label">
+          ACADEMIC 01
+        </div>
 
         <input
           class="input full"
@@ -1375,11 +1761,15 @@ footer{
           class="textarea"
           placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">ACADEMIC 02</div>
+
+        <div class="label">
+          ACADEMIC 02
+        </div>
 
         <input
           class="input full"
@@ -1390,11 +1780,15 @@ footer{
           class="textarea"
           placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">ACADEMIC 03</div>
+
+        <div class="label">
+          ACADEMIC 03
+        </div>
 
         <input
           class="input full"
@@ -1405,11 +1799,15 @@ footer{
           class="textarea"
           placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"
         ></textarea>
+
       </div>
 
 
       <div class="card editable-card">
-        <div class="label">ACADEMIC 04</div>
+
+        <div class="label">
+          ACADEMIC 04
+        </div>
 
         <input
           class="input full"
@@ -1420,6 +1818,7 @@ footer{
           class="textarea"
           placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"
         ></textarea>
+
       </div>
 
     </div>
@@ -1429,11 +1828,15 @@ footer{
 </section>
 
 
-<!-- =========================
-     CONTACT
-========================= -->
+<!-- ==================================================
+     CONTACT PAGE
+================================================== -->
 
-<section id="contact">
+<section
+  class="page"
+  id="page-contact"
+  data-page-content="contact"
+>
 
   <div class="container">
 
@@ -1445,7 +1848,9 @@ footer{
       CONTACT
     </h2>
 
+
     <div class="contact">
+
 
       <a
         class="contact-link"
@@ -1461,7 +1866,11 @@ footer{
         </strong>
 
         <p
-          style="color:var(--muted);font-size:11px;margin-top:10px"
+          style="
+            color:var(--muted);
+            font-size:11px;
+            margin-top:10px;
+          "
         >
           SEND_MESSAGE →
         </p>
@@ -1480,7 +1889,11 @@ footer{
         </strong>
 
         <p
-          style="color:var(--muted);font-size:11px;margin-top:10px"
+          style="
+            color:var(--muted);
+            font-size:11px;
+            margin-top:10px;
+          "
         >
           HYOJIN.ZIP // PERSONAL ARCHIVE
         </p>
@@ -1496,9 +1909,9 @@ footer{
 </main>
 
 
-<!-- =========================
+<!-- ==================================================
      FOOTER
-========================= -->
+================================================== -->
 
 <footer>
 
@@ -1507,8 +1920,14 @@ footer{
   </div>
 
   <div style="margin-top:10px">
-    HYOJIN.ZIP // END OF TRANSMISSION
-    <span class="cursor">█</span>
+
+    HYOJIN.ZIP //
+    END OF TRANSMISSION
+
+    <span class="cursor">
+      █
+    </span>
+
   </div>
 
 </footer>
@@ -1516,299 +1935,150 @@ footer{
 
 <script>
 
-/* =========================
-   MOBILE MENU
-========================= */
+/* ==================================================
+   PAGE ROUTER
+   하나의 HTML이 여러 페이지처럼 작동하도록 함
+================================================== */
 
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+const pages =
+  document.querySelectorAll('.page');
 
-menuToggle.addEventListener('click', () => {
+const navItems =
+  document.querySelectorAll('[data-page]');
 
-  const isOpen = navLinks.classList.toggle('open');
-
-  menuToggle.classList.toggle('active', isOpen);
-
-  menuToggle.setAttribute(
-    'aria-expanded',
-    isOpen
-  );
-
-  menuToggle.setAttribute(
-    'aria-label',
-    isOpen ? '메뉴 닫기' : '메뉴 열기'
-  );
-
-});
+const pageLoader =
+  document.getElementById('pageLoader');
 
 
-/* 모바일 메뉴에서 링크를 누르면 자동으로 닫기 */
+function getCurrentPage(){
 
-document.querySelectorAll('.nav-links a').forEach(link => {
+  const hash =
+    window.location.hash.replace('#','');
 
-  link.addEventListener('click', () => {
+  const validPages = [
+    'home',
+    'profile',
+    'projects',
+    'growth',
+    'play',
+    'academic',
+    'contact'
+  ];
 
-    navLinks.classList.remove('open');
-    menuToggle.classList.remove('active');
+  if(validPages.includes(hash)){
+    return hash;
+  }
 
-    menuToggle.setAttribute(
-      'aria-expanded',
-      'false'
-    );
+  return 'home';
+}
 
-    menuToggle.setAttribute(
-      'aria-label',
-      '메뉴 열기'
+
+function showPage(pageName){
+
+  if(!pageName){
+    pageName = 'home';
+  }
+
+
+  pages.forEach(page => {
+
+    const pageId =
+      page.dataset.pageContent;
+
+    page.classList.toggle(
+      'active',
+      pageId === pageName
     );
 
   });
 
-});
 
+  navItems.forEach(item => {
 
-/* =========================
-   GROWTH DATA
-========================= */
+    const itemPage =
+      item.dataset.page;
 
-const KEY = 'hyojin_zip_growth_v1';
-
-let activities = JSON.parse(
-  localStorage.getItem(KEY) || '[]'
-);
-
-
-function saveActivities(){
-
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(activities)
-  );
-
-}
-
-
-/* =========================
-   PROFILE PHOTO
-========================= */
-
-function loadProfilePhoto(event){
-
-  const file = event.target.files[0];
-
-  if(!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = e => {
-
-    localStorage.setItem(
-      'hyojin_profile_photo',
-      e.target.result
+    item.classList.toggle(
+      'active',
+      itemPage === pageName
     );
 
-    showProfilePhoto(e.target.result);
+  });
+
+
+  /* 페이지 이동 시 맨 위로 */
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+
+  /* 모바일 메뉴 닫기 */
+
+  closeMobileMenu();
+
+
+  /* 브라우저 제목 변경 */
+
+  const titles = {
+
+    home:
+      'HYOJIN.ZIP // SYSTEM ARCHIVE',
+
+    profile:
+      'HYOJIN.ZIP // PROFILE',
+
+    projects:
+      'HYOJIN.ZIP // PROJECTS & SKILLS',
+
+    growth:
+      'HYOJIN.ZIP // GROWTH LOG',
+
+    play:
+      'HYOJIN.ZIP // PLAY LAB',
+
+    academic:
+      'HYOJIN.ZIP // ACADEMIC',
+
+    contact:
+      'HYOJIN.ZIP // CONTACT'
 
   };
 
-  reader.readAsDataURL(file);
+
+  document.title =
+    titles[pageName] ||
+    titles.home;
 
 }
 
 
-function showProfilePhoto(src){
+/* ==================================================
+   NAVIGATION CLICK
+================================================== */
 
-  const img =
-    document.getElementById('profilePreview');
+navItems.forEach(item => {
 
-  const placeholder =
-    document.getElementById('photoPlaceholder');
+  item.addEventListener(
+    'click',
+    event => {
 
-  img.src = src;
+      const target =
+        item.dataset.page;
 
-  img.classList.add('loaded');
+      if(
+        target &&
+        window.location.hash === '#' + target
+      ){
 
-  placeholder.style.display = 'none';
+        event.preventDefault();
 
-}
+        showPage(target);
 
+        return;
 
-function removeProfilePhoto(){
-
-  localStorage.removeItem(
-    'hyojin_profile_photo'
-  );
-
-  const img =
-    document.getElementById('profilePreview');
-
-  img.removeAttribute('src');
-
-  img.classList.remove('loaded');
-
-  document.getElementById(
-    'photoPlaceholder'
-  ).style.display = 'block';
-
-  document.getElementById(
-    'profilePhoto'
-  ).value = '';
-
-}
-
-
-/* =========================
-   MEMORY
-========================= */
-
-let memories = JSON.parse(
-  localStorage.getItem('hyojin_memory_data') || '[]'
-);
-
-
-function addMemory(){
-
-  const input =
-    document.getElementById('memoryText');
-
-  const value =
-    input.value.trim();
-
-  if(!value) return;
-
-  memories.push(value);
-
-  localStorage.setItem(
-    'hyojin_memory_data',
-    JSON.stringify(memories)
-  );
-
-  input.value = '';
-
-  renderMemories();
-
-}
-
-
-function deleteMemory(index){
-
-  memories.splice(index,1);
-
-  localStorage.setItem(
-    'hyojin_memory_data',
-    JSON.stringify(memories)
-  );
-
-  renderMemories();
-
-}
-
-
-function renderMemories(){
-
-  const box =
-    document.getElementById('memoryList');
-
-  if(!memories.length){
-
-    box.innerHTML =
-      '<div class="empty">&gt; 아직 MEMORY DATA가 없습니다.</div>';
-
-    return;
-  }
-
-  box.innerHTML = memories
-    .map((item,index) => `
-
-      <div class="memory-item">
-
-        <span>
-          ${escapeHTML(item)}
-        </span>
-
-        <button
-          onclick="deleteMemory(${index})"
-          type="button"
-        >
-          DELETE
-        </button>
-
-      </div>
-
-    `)
-    .join('');
-
-}
-
-
-/* =========================
-   HASHTAGS
-========================= */
-
-function addHashtag(button){
-
-  const area =
-    button.parentElement;
-
-  const input =
-    area.querySelector('.hashtag-input');
-
-  let value =
-    input.value.trim();
-
-  if(!value) return;
-
-  if(!value.startsWith('#')){
-    value = '#' + value;
-  }
-
-  const tag =
-    document.createElement('span');
-
-  tag.className = 'tag';
-
-  tag.textContent = value;
-
-  tag.title = '클릭해서 삭제';
-
-  tag.onclick = () => {
-    tag.remove();
-  };
-
-  area
-    .querySelector('.hashtag-list')
-    .appendChild(tag);
-
-  input.value = '';
-
-}
-
-
-/* =========================
-   EDITABLE CARDS
-========================= */
-
-const editableElements =
-  document.querySelectorAll(
-    '.editable-card input, .editable-card textarea'
-  );
-
-
-editableElements.forEach((element,index) => {
-
-  const key =
-    'hyojin_edit_' + index;
-
-  element.value =
-    localStorage.getItem(key) || '';
-
-  element.addEventListener(
-    'input',
-    () => {
-
-      localStorage.setItem(
-        key,
-        element.value
-      );
+      }
 
     }
   );
@@ -1816,28 +2086,531 @@ editableElements.forEach((element,index) => {
 });
 
 
-/* =========================
-   GROWTH ACTIVITY
-========================= */
+/* ==================================================
+   BROWSER BACK / FORWARD
+================================================== */
+
+window.addEventListener(
+  'hashchange',
+  () => {
+
+    showPage(
+      getCurrentPage()
+    );
+
+  }
+);
+
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+const menuToggle =
+  document.getElementById('menuToggle');
+
+const navLinks =
+  document.getElementById('navLinks');
+
+
+function closeMobileMenu(){
+
+  navLinks.classList.remove('open');
+
+  menuToggle.classList.remove('active');
+
+  menuToggle.setAttribute(
+    'aria-expanded',
+    'false'
+  );
+
+  menuToggle.setAttribute(
+    'aria-label',
+    '메뉴 열기'
+  );
+
+}
+
+
+menuToggle.addEventListener(
+  'click',
+  () => {
+
+    const isOpen =
+      navLinks.classList.toggle('open');
+
+    menuToggle.classList.toggle(
+      'active',
+      isOpen
+    );
+
+    menuToggle.setAttribute(
+      'aria-expanded',
+      String(isOpen)
+    );
+
+    menuToggle.setAttribute(
+      'aria-label',
+      isOpen
+        ? '메뉴 닫기'
+        : '메뉴 열기'
+    );
+
+  }
+);
+
+
+/* ==================================================
+   PROFILE PHOTO
+================================================== */
+
+const profilePhoto =
+  document.getElementById(
+    'profilePhoto'
+  );
+
+
+profilePhoto.addEventListener(
+  'change',
+  event => {
+
+    const file =
+      event.target.files[0];
+
+    if(!file){
+      return;
+    }
+
+
+    if(!file.type.startsWith('image/')){
+
+      alert(
+        '이미지 파일만 업로드할 수 있습니다.'
+      );
+
+      return;
+
+    }
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      event => {
+
+        localStorage.setItem(
+          'hyojin_profile_photo',
+          event.target.result
+        );
+
+        showProfilePhoto(
+          event.target.result
+        );
+
+      };
+
+
+    reader.readAsDataURL(file);
+
+  }
+);
+
+
+function showProfilePhoto(src){
+
+  const image =
+    document.getElementById(
+      'profilePreview'
+    );
+
+  const placeholder =
+    document.getElementById(
+      'photoPlaceholder'
+    );
+
+
+  image.src = src;
+
+  image.classList.add(
+    'loaded'
+  );
+
+  placeholder.style.display =
+    'none';
+
+}
+
+
+document.getElementById(
+  'removePhoto'
+).addEventListener(
+  'click',
+  () => {
+
+    localStorage.removeItem(
+      'hyojin_profile_photo'
+    );
+
+
+    const image =
+      document.getElementById(
+        'profilePreview'
+      );
+
+
+    image.removeAttribute('src');
+
+    image.classList.remove(
+      'loaded'
+    );
+
+
+    document.getElementById(
+      'photoPlaceholder'
+    ).style.display =
+      'block';
+
+
+    profilePhoto.value = '';
+
+  }
+);
+
+
+/* ==================================================
+   MEMORY
+================================================== */
+
+let memories =
+  JSON.parse(
+    localStorage.getItem(
+      'hyojin_memory_data'
+    ) || '[]'
+  );
+
+
+function saveMemories(){
+
+  localStorage.setItem(
+    'hyojin_memory_data',
+    JSON.stringify(memories)
+  );
+
+}
+
+
+function renderMemories(){
+
+  const box =
+    document.getElementById(
+      'memoryList'
+    );
+
+
+  if(!memories.length){
+
+    box.innerHTML =
+      '<div class="empty">&gt; 아직 MEMORY DATA가 없습니다.</div>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    memories
+      .map(
+        (memory,index) => `
+
+          <div class="memory-item">
+
+            <span>
+              ${escapeHTML(memory)}
+            </span>
+
+            <button
+              type="button"
+              data-memory-index="${index}"
+            >
+              DELETE
+            </button>
+
+          </div>
+
+        `
+      )
+      .join('');
+
+
+  box
+    .querySelectorAll(
+      '[data-memory-index]'
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          const index =
+            Number(
+              button.dataset.memoryIndex
+            );
+
+          memories.splice(
+            index,
+            1
+          );
+
+          saveMemories();
+
+          renderMemories();
+
+        }
+      );
+
+    });
+
+}
+
+
+document.getElementById(
+  'addMemoryButton'
+).addEventListener(
+  'click',
+  addMemory
+);
+
+
+document.getElementById(
+  'memoryText'
+).addEventListener(
+  'keydown',
+  event => {
+
+    if(event.key === 'Enter'){
+
+      event.preventDefault();
+
+      addMemory();
+
+    }
+
+  }
+);
+
+
+function addMemory(){
+
+  const input =
+    document.getElementById(
+      'memoryText'
+    );
+
+
+  const value =
+    input.value.trim();
+
+
+  if(!value){
+    return;
+  }
+
+
+  memories.push(value);
+
+  saveMemories();
+
+  input.value = '';
+
+  renderMemories();
+
+}
+
+
+/* ==================================================
+   EDITABLE CONTENT
+================================================== */
+
+const editableElements =
+  document.querySelectorAll(
+    '.editable-card input, .editable-card textarea'
+  );
+
+
+editableElements.forEach(
+  (element,index) => {
+
+    const key =
+      'hyojin_edit_' + index;
+
+
+    element.value =
+      localStorage.getItem(key) || '';
+
+
+    element.addEventListener(
+      'input',
+      () => {
+
+        localStorage.setItem(
+          key,
+          element.value
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* ==================================================
+   HASHTAG
+================================================== */
+
+document
+  .querySelectorAll('.hashtag-button')
+  .forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        const area =
+          button.parentElement;
+
+
+        const input =
+          area.querySelector(
+            '.hashtag-input'
+          );
+
+
+        const list =
+          area.querySelector(
+            '.hashtag-list'
+          );
+
+
+        let value =
+          input.value.trim();
+
+
+        if(!value){
+          return;
+        }
+
+
+        if(
+          !value.startsWith('#')
+        ){
+
+          value =
+            '#' + value;
+
+        }
+
+
+        const tag =
+          document.createElement(
+            'span'
+          );
+
+
+        tag.className =
+          'tag';
+
+
+        tag.textContent =
+          value;
+
+
+        tag.title =
+          '클릭해서 삭제';
+
+
+        tag.addEventListener(
+          'click',
+          () => {
+
+            tag.remove();
+
+          }
+        );
+
+
+        list.appendChild(tag);
+
+        input.value = '';
+
+      }
+    );
+
+  });
+
+
+/* ==================================================
+   GROWTH
+================================================== */
+
+const GROWTH_KEY =
+  'hyojin_zip_growth_v2';
+
+
+let activities =
+  JSON.parse(
+    localStorage.getItem(
+      GROWTH_KEY
+    ) || '[]'
+  );
+
+
+function saveActivities(){
+
+  localStorage.setItem(
+    GROWTH_KEY,
+    JSON.stringify(activities)
+  );
+
+}
+
+
+document.getElementById(
+  'addActivityButton'
+).addEventListener(
+  'click',
+  addActivity
+);
+
 
 function addActivity(){
 
   const year =
-    document.getElementById('year')
+    document
+      .getElementById('year')
       .value
       .trim();
+
 
   const category =
-    document.getElementById('category')
+    document
+      .getElementById('category')
       .value;
 
+
   const title =
-    document.getElementById('title')
+    document
+      .getElementById('title')
       .value
       .trim();
 
+
   const memo =
-    document.getElementById('memo')
+    document
+      .getElementById('memo')
       .value
       .trim();
 
@@ -1849,12 +2622,13 @@ function addActivity(){
     );
 
     return;
+
   }
 
 
   activities.push({
 
-    id: Date.now(),
+    id:Date.now(),
 
     year,
 
@@ -1869,20 +2643,22 @@ function addActivity(){
 
   activities.sort(
     (a,b) =>
-      Number(b.year) - Number(a.year)
+      Number(b.year) -
+      Number(a.year)
   );
 
 
   saveActivities();
 
-
   document.getElementById(
     'year'
   ).value = '';
 
+
   document.getElementById(
     'title'
   ).value = '';
+
 
   document.getElementById(
     'memo'
@@ -1890,26 +2666,6 @@ function addActivity(){
 
 
   renderActivities();
-
-}
-
-
-function deleteActivity(id){
-
-  if(
-    confirm('이 기록을 삭제할까요?')
-  ){
-
-    activities =
-      activities.filter(
-        item => item.id !== id
-      );
-
-    saveActivities();
-
-    renderActivities();
-
-  }
 
 }
 
@@ -1925,81 +2681,145 @@ function renderActivities(){
   if(!activities.length){
 
     box.innerHTML = `
+
       <div class="empty">
+
         &gt; 아직 저장된 활동 기록이 없습니다.<br>
+
         &gt; 첫 번째 DATA를 입력해보세요.
+
       </div>
+
     `;
 
     return;
+
   }
 
 
   box.innerHTML =
-    activities.map(item => `
+    activities
+      .map(
+        item => `
 
-      <div class="activity">
+          <div class="activity">
 
-        <div>
+            <div>
 
-          <h4>
-            ${escapeHTML(item.year)}
-            //
-            ${escapeHTML(item.title)}
+              <h4>
 
-            <span class="tag">
-              ${escapeHTML(item.category)}
-            </span>
+                ${escapeHTML(item.year)}
 
-          </h4>
+                //
 
-          <p>
-            ${escapeHTML(
-              item.memo || '메모 없음'
-            )}
-          </p>
+                ${escapeHTML(item.title)}
 
-        </div>
+                <span class="tag">
+
+                  ${escapeHTML(item.category)}
+
+                </span>
+
+              </h4>
 
 
-        <button
-          class="btn danger"
-          onclick="deleteActivity(${item.id})"
-          type="button"
-        >
-          DELETE
-        </button>
+              <p>
 
-      </div>
+                ${escapeHTML(
+                  item.memo ||
+                  '메모 없음'
+                )}
 
-    `).join('');
+              </p>
+
+            </div>
+
+
+            <button
+              class="btn danger"
+              type="button"
+              data-delete-activity="${item.id}"
+            >
+              DELETE
+            </button>
+
+          </div>
+
+        `
+      )
+      .join('');
+
+
+  box
+    .querySelectorAll(
+      '[data-delete-activity]'
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          const id =
+            Number(
+              button.dataset
+                .deleteActivity
+            );
+
+
+          if(
+            confirm(
+              '이 기록을 삭제할까요?'
+            )
+          ){
+
+            activities =
+              activities.filter(
+                item =>
+                  item.id !== id
+              );
+
+
+            saveActivities();
+
+            renderActivities();
+
+          }
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================
-   SECURITY
-========================= */
+/* ==================================================
+   HTML ESCAPE
+================================================== */
 
-function escapeHTML(str){
+function escapeHTML(value){
 
-  return String(str).replace(
-    /[&<>"']/g,
-    match => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#039;'
-    }[match])
-  );
+  return String(value)
+    .replace(
+      /[&<>"']/g,
+      character => ({
+
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+
+      }[character])
+    );
 
 }
 
 
-/* =========================
+/* ==================================================
    INITIALIZE
-========================= */
+================================================== */
 
 renderMemories();
 
@@ -2019,6 +2839,13 @@ if(savedPhoto){
   );
 
 }
+
+
+/* 최초 페이지 */
+
+showPage(
+  getCurrentPage()
+);
 
 </script>
 
