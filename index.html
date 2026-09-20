@@ -1246,7 +1246,7 @@ body.light .big-memory{
         href="#game"
         data-page="game"
       >
-        Game
+        🎮 GAME
       </a>
 
       <a
@@ -1993,48 +1993,57 @@ body.light .big-memory{
 <!-- ==================================================
      FOOD GAME PAGE
 ================================================== -->
-
-<section
-  class="page"
-  id="page-game"
-  data-page-content="game"
->
+<section class="page" id="page-game" data-page-content="game">
   <div class="container">
-    <div class="section-tag">// GAME ARCHIVE</div>
-    <h2>FOOD DROP // 수박게임</h2>
-
+    <div class="section-tag">// GAME ARCHIVE / SUIKA MODE</div>
+    <h2>🎮 FOOD MERGE // 수박게임</h2>
     <div class="game-wrap">
       <div class="game-panel">
         <div class="game-head">
-          <div class="game-title">RAMEN KITCHEN // FOOD MERGE</div>
+          <div>
+            <div class="game-title">RAMEN KITCHEN // MERGE DROP</div>
+            <div class="game-subtitle">같은 음식 2개를 합치면 다음 음식으로 진화!</div>
+          </div>
           <div class="game-score">SCORE <span id="gameScore">0</span></div>
         </div>
-        <canvas id="suikaCanvas" width="520" height="650"></canvas>
+        <div class="suika-stage">
+          <canvas id="suikaCanvas" width="520" height="680" aria-label="음식 수박게임"></canvas>
+          <div id="foodGameOver" class="game-over" hidden>
+            <div class="game-over-box">
+              <div class="label">FOOD MERGE SYSTEM // STOPPED</div>
+              <h3>GAME OVER</h3>
+              <p>최종 점수 <strong id="finalGameScore">0</strong></p>
+              <button class="btn" id="foodRestart" type="button">↻ 다시 시작</button>
+            </div>
+          </div>
+        </div>
         <div class="game-controls">
           <button class="btn" id="restartGame" type="button">↻ RESTART</button>
           <button class="btn" id="dropCenter" type="button">DROP CENTER</button>
         </div>
       </div>
-
-      <div class="game-panel">
+      <div class="game-panel game-info-panel">
         <div class="label">HOW TO PLAY</div>
         <p class="game-help">
-          마우스/터치로 좌우 위치를 정한 뒤 클릭하거나 터치하면 음식이 떨어집니다.<br><br>
-          같은 음식끼리 만나면 다음 단계 음식으로 합쳐집니다.<br>
-          바닥 밖으로 너무 많이 쌓이면 GAME OVER.
+          1. 게임판에서 마우스/손가락으로 위치를 정해요.<br>
+          2. 클릭/터치하면 현재 음식이 떨어져요.<br>
+          3. 같은 음식 2개가 만나면 자동으로 합쳐져요.<br>
+          4. 진라면 → 너구리 → 신라면 → … → 수박까지!
         </p>
-
-        <div class="label" style="margin-top:20px">FOOD DATA</div>
+        <div class="label" style="margin-top:20px">KEYBOARD</div>
+        <p class="game-help">← / → : 위치 이동<br>SPACE : 떨어뜨리기<br>R : 다시 시작</p>
+        <div class="label" style="margin-top:20px">FOOD EVOLUTION</div>
         <div class="food-list">
-          <div class="food-chip">🍥 진라면</div>
-          <div class="food-chip">🍜 너구리</div>
-          <div class="food-chip">🥢 신라면</div>
-          <div class="food-chip">🍲 김치라면</div>
-          <div class="food-chip">🍛 짜장라면</div>
-          <div class="food-chip">🍲 라볶이</div>
-          <div class="food-chip">🥘 떡볶이</div>
+          <div class="food-chip">🔴 진라면</div>
+          <div class="food-chip">🟢 너구리</div>
+          <div class="food-chip">⚫ 신라면</div>
+          <div class="food-chip">🔴 김치라면</div>
+          <div class="food-chip">🟤 짜장라면</div>
+          <div class="food-chip">🟠 라볶이</div>
+          <div class="food-chip">🩷 떡볶이</div>
           <div class="food-chip">🍉 수박</div>
         </div>
+        <div class="game-status" id="gameStatus" aria-live="polite">READY // DROP THE FIRST FOOD</div>
       </div>
     </div>
   </div>
@@ -3094,234 +3103,152 @@ function openTypingGame(){
 
 
 /* ==================================================
-   FOOD SUika GAME
-   음식(라면) 버전
+   FOOD MERGE / SUIKA GAME
 ================================================== */
+const canvas=document.getElementById('suikaCanvas');
+const ctx=canvas?canvas.getContext('2d'):null;
+const scoreEl=document.getElementById('gameScore');
+const restartBtn=document.getElementById('restartGame');
+const dropCenterBtn=document.getElementById('dropCenter');
+const statusEl=document.getElementById('gameStatus');
+const overEl=document.getElementById('foodGameOver');
+const finalScoreEl=document.getElementById('finalGameScore');
+const overRestart=document.getElementById('foodRestart');
 
-const canvas = document.getElementById('suikaCanvas');
-const ctx = canvas ? canvas.getContext('2d') : null;
-const scoreEl = document.getElementById('gameScore');
-const restartBtn = document.getElementById('restartGame');
-const dropCenterBtn = document.getElementById('dropCenter');
-
-const foods = [
-  {name:'진라면', emoji:'🍥', radius:20, color:'#d5b58c'},
-  {name:'너구리', emoji:'🍜', radius:26, color:'#c99b65'},
-  {name:'신라면', emoji:'🥢', radius:33, color:'#b76d48'},
-  {name:'김치라면', emoji:'🍲', radius:41, color:'#b64d43'},
-  {name:'짜장라면', emoji:'🍛', radius:50, color:'#76593f'},
-  {name:'라볶이', emoji:'🍲', radius:60, color:'#a95843'},
-  {name:'떡볶이', emoji:'🥘', radius:70, color:'#c46b55'},
-  {name:'수박', emoji:'🍉', radius:82, color:'#789653'}
+const foods=[
+  {name:'진라면',short:'J',r:22,c:'#c24f46'},
+  {name:'너구리',short:'N',r:29,c:'#78965f'},
+  {name:'신라면',short:'S',r:36,c:'#4f554b'},
+  {name:'김치라면',short:'K',r:44,c:'#a85648'},
+  {name:'짜장라면',short:'J',r:53,c:'#765b45'},
+  {name:'라볶이',short:'L',r:63,c:'#b86d4e'},
+  {name:'떡볶이',short:'T',r:74,c:'#bd726d'},
+  {name:'수박',short:'W',r:88,c:'#6f965b'}
 ];
 
-let foodPieces = [];
-let score = 0;
-let gameRunning = true;
-let dropX = canvas ? canvas.width / 2 : 260;
-let nextFood = 0;
-let lastTime = 0;
-let spawnCooldown = 0;
-let dragX = null;
+let pieces=[],score=0,running=false,dropX=260,nextFood=0,lastTime=0,raf=0,canDrop=true,danger=0;
+const FLOOR=670,DANGER=92,GRAVITY=.00095;
+
+function status(t){if(statusEl)statusEl.textContent=t}
+function scoreUpdate(){if(scoreEl)scoreEl.textContent=String(score)}
+function nextRandom(){return Math.floor(Math.random()*3)}
+function piece(type,x,y,vx=0,vy=0){return{type,x,y,vx,vy,r:foods[type].r,age:0}}
 
 function resetGame(){
-  foodPieces = [];
-  score = 0;
-  gameRunning = true;
-  dropX = canvas.width / 2;
-  nextFood = Math.floor(Math.random() * 3);
-  scoreEl.textContent = score;
-  lastTime = performance.now();
-  spawnCooldown = 0;
-  requestAnimationFrame(gameLoop);
+  pieces=[];score=0;nextFood=nextRandom();dropX=canvas.width/2;running=true;canDrop=true;danger=0;
+  scoreUpdate();if(overEl)overEl.hidden=true;
+  status('READY // NEXT: '+foods[nextFood].name+' // CLICK OR SPACE');
+  if(raf)cancelAnimationFrame(raf);lastTime=performance.now();raf=requestAnimationFrame(loop);
 }
 
-function spawnFood(x){
-  if(!gameRunning || spawnCooldown > 0) return;
-  const type = nextFood;
-  foodPieces.push({
-    x:Math.max(foods[type].radius, Math.min(canvas.width-foods[type].radius, x)),
-    y:foods[type].radius + 5,
-    vx:0,
-    vy:0,
-    type,
-    r:foods[type].radius,
-    settled:false
-  });
-  nextFood = Math.floor(Math.random() * Math.min(3, foods.length));
-  spawnCooldown = 380;
+function drop(x){
+  if(!running||!canDrop)return;
+  const f=foods[nextFood];
+  x=Math.max(f.r+4,Math.min(canvas.width-f.r-4,x));
+  pieces.push(piece(nextFood,x,35,0,.03));
+  nextFood=nextRandom();canDrop=false;
+  status('DROPPED // NEXT: '+foods[nextFood].name);
+  setTimeout(()=>canDrop=true,240);
 }
 
-function mergeFoods(a,b,indexA,indexB){
-  if(a.type !== b.type || a.type >= foods.length - 1) return false;
-  const newType = a.type + 1;
-  const nx = (a.x+b.x)/2;
-  const ny = (a.y+b.y)/2;
-  foodPieces.splice(Math.max(indexA,indexB),1);
-  foodPieces.splice(Math.min(indexA,indexB),1);
-  foodPieces.push({
-    x:nx,y:ny,vx:0,vy:-1.5,type:newType,
-    r:foods[newType].radius,settled:false
-  });
-  score += (newType + 1) * 10;
-  scoreEl.textContent = score;
+function merge(i,j){
+  const a=pieces[i],b=pieces[j];if(!a||!b||a.type!==b.type||a.type>=foods.length-1)return false;
+  const t=a.type+1,x=(a.x+b.x)/2,y=(a.y+b.y)/2;
+  pieces.splice(Math.max(i,j),1);pieces.splice(Math.min(i,j),1);
+  pieces.push(piece(t,x,y,(a.vx+b.vx)*.25,-.16));
+  score+=(t+1)*15;scoreUpdate();status('MERGE // '+foods[t].name+'  +'+((t+1)*15));return true;
+}
+
+function collide(a,b){
+  const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||.001,min=a.r+b.r;
+  if(d>=min)return false;
+  if(a.type===b.type&&a.type<foods.length-1)return'merge';
+  const nx=dx/d,ny=dy/d,over=min-d;
+  a.x-=nx*over*.51;a.y-=ny*over*.51;b.x+=nx*over*.51;b.y+=ny*over*.51;
+  const rel=(b.vx-a.vx)*nx+(b.vy-a.vy)*ny;
+  if(rel<0){const imp=-rel*.28;a.vx-=imp*nx;a.vy-=imp*ny;b.vx+=imp*nx;b.vy+=imp*ny}
   return true;
 }
 
-function updatePhysics(dt){
-  spawnCooldown = Math.max(0, spawnCooldown - dt);
-
-  for(const p of foodPieces){
-    p.vy += 0.0018 * dt;
-    p.x += p.vx * dt;
-    p.y += p.vy * dt;
-
-    if(p.x-p.r < 0){ p.x=p.r; p.vx *= -0.35; }
-    if(p.x+p.r > canvas.width){ p.x=canvas.width-p.r; p.vx *= -0.35; }
-
-    const floor = canvas.height - p.r - 5;
-    if(p.y > floor){
-      p.y=floor;
-      p.vy *= -0.18;
-      p.vx *= 0.92;
-      if(Math.abs(p.vy) < 0.05) p.vy=0;
-    }
+function update(dt){
+  for(const p of pieces){
+    p.age+=dt;p.vy+=GRAVITY*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.995,dt/16);
+    if(p.x-p.r<4){p.x=p.r+4;p.vx=Math.abs(p.vx)*.45}
+    if(p.x+p.r>canvas.width-4){p.x=canvas.width-p.r-4;p.vx=-Math.abs(p.vx)*.45}
+    const floor=FLOOR-p.r;
+    if(p.y>floor){p.y=floor;if(Math.abs(p.vy)>.025)p.vy*=-.20;else p.vy=0;p.vx*=.93}
   }
-
-  // simple iterative circle collision / merging
-  for(let pass=0; pass<2; pass++){
-    for(let i=0;i<foodPieces.length;i++){
-      for(let j=i+1;j<foodPieces.length;j++){
-        const a=foodPieces[i], b=foodPieces[j];
-        const dx=b.x-a.x, dy=b.y-a.y;
-        const dist=Math.hypot(dx,dy) || 0.001;
-        const minDist=a.r+b.r;
-
-        if(dist < minDist){
-          if(a.type===b.type && a.type<foods.length-1){
-            mergeFoods(a,b,i,j);
-            return;
-          }
-          const nx=dx/dist, ny=dy/dist;
-          const overlap=minDist-dist;
-          a.x -= nx*overlap/2; a.y -= ny*overlap/2;
-          b.x += nx*overlap/2; b.y += ny*overlap/2;
-          const impulse=0.025;
-          a.vx -= nx*impulse; a.vy -= ny*impulse;
-          b.vx += nx*impulse; b.vy += ny*impulse;
-        }
+  for(let pass=0;pass<5;pass++){
+    let didMerge=false;
+    for(let i=0;i<pieces.length;i++){
+      for(let j=i+1;j<pieces.length;j++){
+        const r=collide(pieces[i],pieces[j]);
+        if(r==='merge'){merge(i,j);didMerge=true;break}
       }
+      if(didMerge)break;
     }
+    if(!didMerge)break;
   }
-
-  // game over if food reaches the danger line and is not moving
-  for(const p of foodPieces){
-    if(p.y-p.r < 52 && Math.abs(p.vy)<0.08 && p.y > 55){
-      gameRunning=false;
-      showGameOver();
-      break;
-    }
-  }
+  let high=false;
+  for(const p of pieces){if(p.y-p.r<DANGER&&p.age>1000&&Math.abs(p.vy)<.035){high=true;break}}
+  if(high){danger+=dt;status('WARNING // STACK TOO HIGH');if(danger>=1000)endGame()}
+  else danger=Math.max(0,danger-dt*1.5);
 }
 
-function drawGame(){
+function rr(c,x,y,w,h,r){
+  r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()
+}
+
+function drawFood(p){
+  const f=foods[p.type],light=document.body.classList.contains('light');
+  ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=f.c;ctx.fill();
+  ctx.lineWidth=2;ctx.strokeStyle=light?'#263829':'#c2d0bd';ctx.stroke();
+  const w=p.r*1.38,h=Math.max(16,p.r*.54);
+  rr(ctx,p.x-w/2,p.y-h/2,w,h,6);ctx.fillStyle=light?'rgba(247,251,245,.94)':'rgba(10,16,12,.80)';ctx.fill();
+  ctx.strokeStyle=light?'#36563a':'#9caf97';ctx.lineWidth=1;ctx.stroke();
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='900 '+Math.max(12,p.r*.42)+'px "JetBrains Mono",monospace';ctx.fillStyle=light?'#223026':'#eef5ea';ctx.fillText(f.short,p.x,p.y);
+  ctx.font='700 '+Math.max(7,Math.min(12,p.r*.16))+'px "JetBrains Mono",monospace';ctx.fillStyle=light?'#263829':'#f1f5ec';ctx.fillText(f.name,p.x,p.y+p.r*.57);
+}
+
+function draw(){
+  const light=document.body.classList.contains('light');
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  const light = document.body.classList.contains('light');
-  ctx.fillStyle = light ? '#edf6e9' : '#0d140f';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  // danger line
-  ctx.strokeStyle = light ? '#769d71' : '#5f785e';
-  ctx.setLineDash([7,7]);
-  ctx.beginPath();
-  ctx.moveTo(0,55);
-  ctx.lineTo(canvas.width,55);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  ctx.fillStyle = light ? '#557a55' : '#8ca487';
-  ctx.font = '11px "JetBrains Mono"';
-  ctx.fillText('DROP ZONE',12,20);
-  ctx.fillText(`NEXT: ${foods[nextFood].emoji} ${foods[nextFood].name}`,12,39);
-
-  for(const p of foodPieces){
-    const f=foods[p.type];
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=f.color;
-    ctx.fill();
-    ctx.strokeStyle=light ? '#35563a' : '#a4b99e';
-    ctx.lineWidth=2;
-    ctx.stroke();
-
-    ctx.font=`${Math.max(18,p.r*0.78)}px "Segoe UI Emoji","Apple Color Emoji",sans-serif`;
-    ctx.textAlign='center';
-    ctx.textBaseline='middle';
-    ctx.fillText(f.emoji,p.x,p.y-2);
-
-    ctx.font=`${Math.max(8,Math.min(12,p.r/5))}px "JetBrains Mono"`;
-    ctx.fillStyle=light ? '#263829' : '#e5eee2';
-    ctx.fillText(f.name,p.x,p.y+p.r*0.62);
+  ctx.fillStyle=light?'#f0f7ed':'#0b120d';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle=light?'rgba(69,101,70,.08)':'rgba(166,190,159,.06)';ctx.lineWidth=1;
+  for(let x=20;x<canvas.width;x+=26){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke()}
+  for(let y=0;y<canvas.height;y+=26){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke()}
+  ctx.setLineDash([8,7]);ctx.strokeStyle=danger>0?(light?'#a85d50':'#d88776'):(light?'#71926d':'#6d806a');ctx.beginPath();ctx.moveTo(0,DANGER);ctx.lineTo(canvas.width,DANGER);ctx.stroke();ctx.setLineDash([]);
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle=light?'#4d6c50':'#9aac96';ctx.font='700 11px "JetBrains Mono",monospace';ctx.fillText('DANGER LINE',12,DANGER-9);ctx.fillText('NEXT  '+foods[nextFood].name,12,24);
+  if(running){
+    ctx.strokeStyle=light?'rgba(55,91,58,.28)':'rgba(188,208,182,.22)';ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(dropX,38);ctx.lineTo(dropX,FLOOR);ctx.stroke();ctx.setLineDash([]);
+    ctx.globalAlpha=.3;drawFood(piece(nextFood,dropX,45));ctx.globalAlpha=1;
   }
-  ctx.textAlign='left';
-  ctx.textBaseline='alphabetic';
-
-  // aiming guide
-  if(gameRunning){
-    ctx.strokeStyle=light ? 'rgba(53,91,55,.35)' : 'rgba(171,193,164,.22)';
-    ctx.setLineDash([3,5]);
-    ctx.beginPath();
-    ctx.moveTo(dropX,50);
-    ctx.lineTo(dropX,canvas.height-20);
-    ctx.stroke();
-    ctx.setLineDash([]);
-  }
+  for(const p of pieces)drawFood(p);
+  ctx.fillStyle=light?'#d9e8d5':'#18231a';ctx.fillRect(0,FLOOR,canvas.width,canvas.height-FLOOR);
+  ctx.fillStyle=light?'#5b805d':'#81957d';ctx.font='700 10px "JetBrains Mono",monospace';ctx.fillText('KITCHEN FLOOR // MERGE ZONE',12,FLOOR+20);
 }
 
-function gameLoop(now){
-  if(!canvas) return;
-  const dt=Math.min(32, now-lastTime || 16);
-  lastTime=now;
-  if(gameRunning) updatePhysics(dt);
-  drawGame();
-  if(gameRunning) requestAnimationFrame(gameLoop);
-}
+function loop(now){if(!running)return;const dt=Math.min(34,Math.max(8,now-lastTime));lastTime=now;update(dt);draw();if(running)raf=requestAnimationFrame(loop)}
+function endGame(){if(!running)return;running=false;canDrop=false;if(raf)cancelAnimationFrame(raf);draw();if(finalScoreEl)finalScoreEl.textContent=String(score);if(overEl)overEl.hidden=false;status('GAME OVER // PRESS RESTART OR R')}
 
-function showGameOver(){
-  if(document.getElementById('foodGameOver')) return;
-  const overlay=document.createElement('div');
-  overlay.className='game-over show';
-  overlay.id='foodGameOver';
-  overlay.innerHTML=`
-    <div class="game-over-box">
-      <div class="label">FOOD MERGE SYSTEM // STOPPED</div>
-      <h3>GAME OVER</h3>
-      <p>최종 점수: <strong>${score}</strong></p>
-      <button class="btn" id="foodRestart" type="button">↻ 다시 시작</button>
-    </div>`;
-  document.body.appendChild(overlay);
-  overlay.querySelector('#foodRestart').addEventListener('click',()=>{
-    overlay.remove();
-    resetGame();
-  });
-}
+function pointer(e){const r=canvas.getBoundingClientRect();dropX=Math.max(10,Math.min(canvas.width-10,(e.clientX-r.left)*(canvas.width/r.width)))}
+canvas.addEventListener('pointermove',pointer);
+canvas.addEventListener('pointerdown',e=>{e.preventDefault();pointer(e);drop(dropX)});
+restartBtn.addEventListener('click',resetGame);
+dropCenterBtn.addEventListener('click',()=>drop(canvas.width/2));
+overRestart.addEventListener('click',resetGame);
 
-if(canvas){
-  const setPointer = (event)=>{
-    const rect=canvas.getBoundingClientRect();
-    const clientX=event.touches ? event.touches[0].clientX : event.clientX;
-    dropX=(clientX-rect.left)*(canvas.width/rect.width);
-  };
-  canvas.addEventListener('mousemove',setPointer);
-  canvas.addEventListener('click',()=>spawnFood(dropX));
-  canvas.addEventListener('touchmove',event=>{ event.preventDefault(); setPointer(event); },{passive:false});
-  canvas.addEventListener('touchstart',event=>{ setPointer(event); },{passive:true});
-  canvas.addEventListener('touchend',()=>spawnFood(dropX),{passive:true});
-  restartBtn.addEventListener('click',resetGame);
-  dropCenterBtn.addEventListener('click',()=>spawnFood(canvas.width/2));
-  resetGame();
-}
+document.addEventListener('keydown',e=>{
+  const page=document.querySelector('.page.active');if(!page||page.dataset.pageContent!=='game')return;
+  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;
+  if(e.key==='ArrowLeft'){e.preventDefault();dropX=Math.max(foods[nextFood].r+5,dropX-22);draw()}
+  if(e.key==='ArrowRight'){e.preventDefault();dropX=Math.min(canvas.width-foods[nextFood].r-5,dropX+22);draw()}
+  if(e.code==='Space'){e.preventDefault();drop(dropX)}
+  if(e.key.toLowerCase()==='r'){e.preventDefault();resetGame()}
+});
+
+resetGame();
 
 /* ==================================================
    HTML ESCAPE
