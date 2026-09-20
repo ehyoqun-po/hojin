@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYOJIN.ZIP // SYSTEM ARCHIVE</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Press+Start+2P&display=swap');
+
+:root{
+  --main:#607456;
+  --deep:#467235;
+  --sub:#618764;
+  --bg:#0b100d;
+  --panel:#111912;
+  --line:#354735;
+  --text:#d9e2d6;
+  --muted:#879987;
+  --accent:#9caf93;
+  --danger:#bd8b76;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(circle at 20% 10%,rgba(70,114,53,.12),transparent 25%),
+  linear-gradient(rgba(96,116,86,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(96,116,86,.025) 1px,transparent 1px),var(--bg);
+  background-size:auto,24px 24px,24px 24px;
+  color:var(--text);font-family:"JetBrains Mono",monospace;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 4px);z-index:20}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1120px,92%);margin:auto}
+nav{
+  position:sticky;top:0;z-index:15;background:rgba(11,16,13,.94);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(10px)
+}
+.nav-inner{min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-weight:700;color:#b8c8b2;letter-spacing:1px}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{padding:9px 11px;color:var(--muted);font-size:12px;border:1px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:#e8f0e5;border-color:var(--main);background:rgba(70,114,53,.16)}
+.hero{padding:90px 0 65px;border-bottom:1px dashed var(--line)}
+.status{font-size:11px;color:var(--sub);margin-bottom:22px}
+.status span{display:inline-block;width:8px;height:8px;background:var(--sub);box-shadow:0 0 12px var(--sub);margin-right:8px}
+h1{font-family:"Press Start 2P",monospace;font-size:clamp(28px,6vw,68px);line-height:1.35;margin:0;color:#e2eadf;text-shadow:4px 4px 0 rgba(70,114,53,.35)}
+.glitch{position:relative;display:inline-block}
+.glitch:after{content:"";position:absolute;left:3px;top:3px;color:var(--sub);z-index:-1}
+.lead{font-size:15px;color:#aebca9;margin:26px 0;line-height:1.9}
+.terminal{border:1px solid var(--line);background:#0d140f;padding:18px;box-shadow:8px 8px 0 rgba(70,114,53,.08);font-size:12px}
+.terminal b{color:var(--accent)}
+section{padding:82px 0;border-bottom:1px dashed var(--line)}
+.section-tag{color:var(--sub);font-size:11px;margin-bottom:12px}
+h2{font-family:"Press Start 2P",monospace;font-size:20px;line-height:1.6;margin:0 0 28px;color:#dbe7d8}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:rgba(17,25,18,.9);border:1px solid var(--line);padding:24px;position:relative}
+.card:before{content:"";position:absolute;top:0;left:0;width:42px;height:3px;background:var(--main)}
+.card h3{margin:0 0 14px;font-size:15px;color:#cbd8c8}
+.card p{color:var(--muted);font-size:13px;line-height:1.8;margin:0}
+.tag{display:inline-block;border:1px solid #466044;color:#9daf99;padding:4px 7px;font-size:10px;margin:5px 4px 0 0}
+.profile-box{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:stretch}
+.id-box{border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px;background:linear-gradient(135deg,rgba(96,116,86,.15),transparent)}
+.pixel-face{font-size:48px;letter-spacing:-10px;color:var(--main);text-align:center;padding:20px 0}
+.label{color:var(--sub);font-size:10px;margin-bottom:8px}
+.big-memory{font-size:18px;color:#d7e3d3;margin-bottom:16px}
+.progress{height:8px;border:1px solid var(--line);padding:1px;margin-bottom:18px}
+.progress i{display:block;height:100%;width:78%;background:var(--main)}
+.skill{margin:16px 0}
+.skill-head{display:flex;justify-content:space-between;font-size:11px;color:#aab9a5;margin-bottom:7px}
+.bar{height:7px;background:#1b261d;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:var(--sub)}
+.timeline{position:relative;margin:15px 0 30px;padding-left:28px;border-left:1px solid var(--line)}
+.year-item{margin:0 0 18px;position:relative}
+.year-item:before{content:"";position:absolute;left:-33px;top:6px;width:8px;height:8px;background:var(--sub);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--line)}
+.year-item h3{margin:0 0 7px;font-size:14px;color:#d6e1d2}
+.year-item p{margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.input,.select,.textarea{background:#0c120e;color:var(--text);border:1px solid var(--line);padding:11px;outline:none}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--sub)}
+.textarea{width:100%;min-height:90px;resize:vertical}
+.btn{border:1px solid var(--main);background:rgba(70,114,53,.18);color:#d8e4d5;padding:10px 13px}
+.btn:hover{background:rgba(96,116,86,.28)}
+.btn.danger{border-color:#725247;color:#d3aaa0}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.form .full{grid-column:1/-1}
+.activity{display:flex;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding:16px 0}
+.activity h4{margin:0 0 7px;font-size:13px}
+.activity p{margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.empty{color:#687668;font-size:12px;padding:20px 0}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact-link{display:block;border:1px solid var(--line);padding:24px;background:#101810}
+.contact-link:hover{border-color:var(--sub);transform:translateY(-2px)}
+footer{padding:35px 0 50px;color:#617060;font-size:11px;text-align:center}
+.cursor{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+
+.photo-box{height:145px;border:1px dashed #536653;background:#0b120d;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;margin:8px 0 10px}
+.photo-box img{width:100%;height:100%;object-fit:cover;display:none}
+.photo-box img.loaded{display:block}
+#photoPlaceholder{color:#667866;font-family:"Press Start 2P",monospace;font-size:10px;line-height:2;text-align:center}
+.photo-actions{display:flex;gap:6px;margin-bottom:16px}
+.small{font-size:9px;padding:7px 8px;display:inline-block}
+.memory-form{display:flex;gap:7px}
+.memory-form .input{flex:1}
+.memory-item{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #283528;padding:9px 0;font-size:11px;color:#aab9a5}
+.memory-item button{background:none;border:0;color:#80665d}
+.editable-card .textarea{margin-top:10px}
+.edit-project-title{margin-bottom:0}
+.hashtag-area{margin-top:13px}
+.hashtag-list{margin-top:8px}
+.hashtag-list .tag{cursor:pointer}
+@media(max-width:760px){
+ .nav-inner{align-items:flex-start;padding:13px 0;flex-direction:column}
+ .nav-links{justify-content:flex-start}
+ .hero{padding:65px 0 45px}
+ .grid,.profile-box,.contact,.form{grid-template-columns:1fr}
+ .form .full{grid-column:auto}
+ section{padding:58px 0}
+ h2{font-size:16px}
+ .activity{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<nav>
+ <div class="container nav-inner">
+  <a class="logo" href="#home">HYOJIN.ZIP</a>
+  <div class="nav-links">
+   <a href="#home">Home</a><a href="#profile">Profile</a><a href="#projects">Projects/Skills</a>
+   <a href="#growth">Growth</a><a href="#play">Play Lab</a><a href="#academic">Academic</a><a href="#contact">Contact</a>
+  </div>
+ </div>
+</nav>
+
+<main>
+<section id="home" class="hero">
+ <div class="container">
+  <div class="status"><span></span>SYSTEM ONLINE // ARCHIVE NODE 01 // ACCESS GRANTED</div>
+  <h1 class="glitch">HYOJIN_<br>SYSTEM.EXE</h1>
+  <p class="lead">효진의 아카이브 서버에 접속했습니다.</p>
+  <div class="terminal">
+   <b>&gt; NAVIGATION &amp; LOGS</b><br><br>
+   일상과 아이디어가 실시간으로 기록되는 데이터 로그<br>
+   <span style="color:#687868">&gt; profile / projects / growth / play_lab / contact</span><span class="cursor">_</span>
+  </div>
+ </div>
+</section>
+
+<section id="profile">
+ <div class="container">
+  <div class="section-tag">// USER PROFILE</div><h2>ID: 효진</h2>
+  <div class="profile-box">
+   <div class="id-box">
+    <div class="label">PERSONAL_NODE</div>
+    <label class="photo-box" for="profilePhoto">
+      <img id="profilePreview" alt="내 프로필 사진 미리보기">
+      <span id="photoPlaceholder">PHOTO<br>UPLOAD</span>
+    </label>
+    <input id="profilePhoto" type="file" accept="image/*" hidden onchange="loadProfilePhoto(event)">
+    <div class="photo-actions"><label class="btn small" for="profilePhoto">CHOOSE PHOTO</label><button class="btn small danger" onclick="removeProfilePhoto()">REMOVE</button></div>
+    <div class="label">STATUS: ONLINE</div>
+   </div>
+   <div class="card">
+    <div class="label">MEMORY CAPACITY</div>
+    <div class="big-memory">나만의 기억 데이터를 직접 기록하는 공간.</div>
+    <div class="progress"><i></i></div>
+    <div class="memory-form">
+      <input id="memoryText" class="input" placeholder="텍스처 / 음악 / 룩북 / 기억하고 싶은 것">
+      <button class="btn" onclick="addMemory()">+ ADD</button>
+    </div>
+    <div class="label" style="margin-top:18px">MY MEMORY DATA</div>
+    <div id="memoryList"></div>
+    <p style="margin-top:22px">기억하고 싶은 취향과 일상의 조각을 자유롭게 저장해보세요.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="projects">
+ <div class="container">
+  <div class="section-tag">// PROJECTS &amp; SKILLS</div><h2>BUILD / CREATE / DEBUG</h2>
+  <div class="grid">
+   <div class="card editable-card">
+    <div class="label">PROJECT 01</div>
+    <input class="input full edit-project-title" placeholder="프로젝트 제목">
+    <textarea class="textarea" placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"></textarea>
+    <div class="hashtag-area">
+      <input class="input hashtag-input" placeholder="#키워드 입력 (예: #HTML)">
+      <button class="btn" onclick="addHashtag(this)">+ KEYWORD</button>
+      <div class="hashtag-list"></div>
+    </div>
+   </div>
+   <div class="card editable-card">
+    <div class="label">PROJECT 02</div>
+    <input class="input full edit-project-title" placeholder="프로젝트 제목">
+    <textarea class="textarea" placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"></textarea>
+    <div class="hashtag-area">
+      <input class="input hashtag-input" placeholder="#키워드 입력">
+      <button class="btn" onclick="addHashtag(this)">+ KEYWORD</button>
+      <div class="hashtag-list"></div>
+    </div>
+   </div>
+   <div class="card editable-card">
+    <div class="label">PROJECT 03</div>
+    <input class="input full edit-project-title" placeholder="프로젝트 제목">
+    <textarea class="textarea" placeholder="프로젝트 내용, 내가 한 일, 배운 점 등을 직접 입력"></textarea>
+    <div class="hashtag-area">
+      <input class="input hashtag-input" placeholder="#키워드 입력">
+      <button class="btn" onclick="addHashtag(this)">+ KEYWORD</button>
+      <div class="hashtag-list"></div>
+    </div>
+   </div>
+   <div class="card editable-card">
+    <div class="label">SKILL / PROJECT 04</div>
+    <input class="input full edit-project-title" placeholder="제목">
+    <textarea class="textarea" placeholder="내용을 자유롭게 입력"></textarea>
+    <div class="hashtag-area">
+      <input class="input hashtag-input" placeholder="#키워드 입력">
+      <button class="btn" onclick="addHashtag(this)">+ KEYWORD</button>
+      <div class="hashtag-list"></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="growth">
+ <div class="container">
+  <div class="section-tag">// PERSONAL GROWTH DATABASE</div><h2>GROWTH_LOG</h2>
+  <div class="card">
+   <p style="margin-bottom:20px">연도별 성장 기록과 활동을 직접 추가할 수 있습니다. 저장된 내용은 이 브라우저의 LocalStorage에 보관됩니다.</p>
+   <div class="form">
+    <input id="year" class="input" type="number" placeholder="년도 (예: 2026)">
+    <select id="category" class="select"><option>학교</option><option>동아리</option><option>외부활동</option><option>프로젝트</option><option>대회</option><option>기타</option></select>
+    <input id="title" class="input full" placeholder="활동 제목">
+    <textarea id="memo" class="textarea full" placeholder="활동 내용 / 느낀 점 / 배운 점을 자유롭게 기록"></textarea>
+    <button class="btn full" onclick="addActivity()">+ ADD TO ARCHIVE</button>
+   </div>
+   <div id="activityList"></div>
+  </div>
+ </div>
+</section>
+
+<section id="play">
+ <div class="container">
+  <div class="section-tag">// PLAY LAB</div><h2>OFFLINE_DATA / ONLINE_MOOD</h2>
+  <div class="grid">
+   <div class="card editable-card"><div class="label">PLAY DATA 01</div><input class="input full" placeholder="제목"><textarea class="textarea" placeholder="내가 직접 기록하고 싶은 내용"></textarea></div>
+   <div class="card editable-card"><div class="label">PLAY DATA 02</div><input class="input full" placeholder="제목"><textarea class="textarea" placeholder="내가 직접 기록하고 싶은 내용"></textarea></div>
+   <div class="card editable-card"><div class="label">PLAY DATA 03</div><input class="input full" placeholder="제목"><textarea class="textarea" placeholder="내가 직접 기록하고 싶은 내용"></textarea></div>
+   <div class="card editable-card"><div class="label">PLAY DATA 04</div><input class="input full" placeholder="제목"><textarea class="textarea" placeholder="내가 직접 기록하고 싶은 내용"></textarea></div>
+  </div>
+ </div>
+</section>
+
+<section id="academic">
+ <div class="container">
+  <div class="section-tag">// ACADEMIC ARCHIVE</div><h2>STUDY / SCHOOL LOG</h2>
+  <div class="grid">
+   <div class="card editable-card"><div class="label">ACADEMIC 01</div><input class="input full" placeholder="과목 / 주제"><textarea class="textarea" placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"></textarea></div>
+   <div class="card editable-card"><div class="label">ACADEMIC 02</div><input class="input full" placeholder="과목 / 주제"><textarea class="textarea" placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"></textarea></div>
+   <div class="card editable-card"><div class="label">ACADEMIC 03</div><input class="input full" placeholder="과목 / 주제"><textarea class="textarea" placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"></textarea></div>
+   <div class="card editable-card"><div class="label">ACADEMIC 04</div><input class="input full" placeholder="과목 / 주제"><textarea class="textarea" placeholder="수업, 탐구, 수행평가, 배운 내용 등을 기록"></textarea></div>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="container">
+  <div class="section-tag">// COMMUNICATION CHANNEL</div><h2>CONTACT</h2>
+  <div class="contact">
+   <a class="contact-link" href="mailto:hyojin7572@naver.com"><div class="label">E-MAIL</div><strong>hyojin7572@naver.com</strong><p style="color:var(--muted);font-size:11px;margin-top:10px">SEND_MESSAGE →</p></a>
+   <div class="contact-link"><div class="label">SERVER STATUS</div><strong style="color:var(--sub)">● AVAILABLE</strong><p style="color:var(--muted);font-size:11px;margin-top:10px">HYOJIN.ZIP // PERSONAL ARCHIVE</p></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div>[DATA LOADING...]</div>
+ <div style="margin-top:10px">HYOJIN.ZIP // END OF TRANSMISSION <span class="cursor">█</span></div>
+</footer>
+
+<script>
+const KEY='hyojin_zip_growth_v1';
+let activities=JSON.parse(localStorage.getItem(KEY)||'[]');
+
+function save(){localStorage.setItem(KEY,JSON.stringify(activities));
+function loadProfilePhoto(event){
+ const file=event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=e=>{
+   localStorage.setItem('hyojin_profile_photo',e.target.result);
+   showProfilePhoto(e.target.result);
+ };
+ reader.readAsDataURL(file);
+}
+function showProfilePhoto(src){
+ const img=document.getElementById('profilePreview');
+ const placeholder=document.getElementById('photoPlaceholder');
+ img.src=src; img.classList.add('loaded'); placeholder.style.display='none';
+}
+function removeProfilePhoto(){
+ localStorage.removeItem('hyojin_profile_photo');
+ const img=document.getElementById('profilePreview');
+ img.removeAttribute('src'); img.classList.remove('loaded');
+ document.getElementById('photoPlaceholder').style.display='block';
+ document.getElementById('profilePhoto').value='';
+}
+let memories=JSON.parse(localStorage.getItem('hyojin_memory_data')||'[]');
+function addMemory(){
+ const input=document.getElementById('memoryText');
+ const value=input.value.trim();
+ if(!value)return;
+ memories.push(value);localStorage.setItem('hyojin_memory_data',JSON.stringify(memories));
+ input.value='';renderMemories();
+}
+function deleteMemory(i){
+ memories.splice(i,1);localStorage.setItem('hyojin_memory_data',JSON.stringify(memories));renderMemories();
+}
+function renderMemories(){
+ const box=document.getElementById('memoryList');
+ if(!memories.length){box.innerHTML='<div class="empty">> 아직 MEMORY DATA가 없습니다.</div>';return;}
+ box.innerHTML=memories.map((x,i)=>`<div class="memory-item"><span>${escapeHTML(x)}</span><button onclick="deleteMemory(${i})">DELETE</button></div>`).join('');
+}
+function addHashtag(btn){
+ const area=btn.parentElement;
+ const input=area.querySelector('.hashtag-input');
+ let value=input.value.trim();
+ if(!value)return;
+ if(!value.startsWith('#'))value='#'+value;
+ const tag=document.createElement('span');
+ tag.className='tag';tag.textContent=value;
+ tag.title='클릭해서 삭제';
+ tag.onclick=()=>tag.remove();
+ area.querySelector('.hashtag-list').appendChild(tag);
+ input.value='';
+}
+document.querySelectorAll('.editable-card input,.editable-card textarea').forEach(el=>{
+ const key='hyojin_edit_'+[...document.querySelectorAll('.editable-card input,.editable-card textarea')].indexOf(el);
+ el.value=localStorage.getItem(key)||'';
+ el.addEventListener('input',()=>localStorage.setItem(key,el.value));
+});
+renderMemories();
+const savedPhoto=localStorage.getItem('hyojin_profile_photo');
+if(savedPhoto)showProfilePhoto(savedPhoto);
+
+render();}
+function addActivity(){
+ const year=document.getElementById('year').value.trim();
+ const category=document.getElementById('category').value;
+ const title=document.getElementById('title').value.trim();
+ const memo=document.getElementById('memo').value.trim();
+ if(!year||!title){alert('년도와 활동 제목을 입력해주세요.');return;}
+ activities.push({id:Date.now(),year,category,title,memo});
+ activities.sort((a,b)=>Number(b.year)-Number(a.year));
+ save();
+ document.getElementById('title').value='';
+ document.getElementById('memo').value='';
+}
+function deleteActivity(id){
+ if(confirm('이 기록을 삭제할까요?')){
+  activities=activities.filter(x=>x.id!==id);save();
+ }
+}
+function render(){
+ const box=document.getElementById('activityList');
+ if(!activities.length){box.innerHTML='<div class="empty">&gt; 아직 저장된 활동 기록이 없습니다.<br>&gt; 첫 번째 DATA를 입력해보세요.</div>';return;}
+ box.innerHTML=activities.map(x=>`
+  <div class="activity">
+   <div><h4>${escapeHTML(x.year)} // ${escapeHTML(x.title)} <span class="tag">${escapeHTML(x.category)}</span></h4>
+   <p>${escapeHTML(x.memo||'메모 없음')}</p></div>
+   <button class="btn danger" onclick="deleteActivity(${x.id})">DELETE</button>
+  </div>`).join('');
+}
+function escapeHTML(str){return String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+
+function loadProfilePhoto(event){
+ const file=event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=e=>{
+   localStorage.setItem('hyojin_profile_photo',e.target.result);
+   showProfilePhoto(e.target.result);
+ };
+ reader.readAsDataURL(file);
+}
+function showProfilePhoto(src){
+ const img=document.getElementById('profilePreview');
+ const placeholder=document.getElementById('photoPlaceholder');
+ img.src=src; img.classList.add('loaded'); placeholder.style.display='none';
+}
+function removeProfilePhoto(){
+ localStorage.removeItem('hyojin_profile_photo');
+ const img=document.getElementById('profilePreview');
+ img.removeAttribute('src'); img.classList.remove('loaded');
+ document.getElementById('photoPlaceholder').style.display='block';
+ document.getElementById('profilePhoto').value='';
+}
+let memories=JSON.parse(localStorage.getItem('hyojin_memory_data')||'[]');
+function addMemory(){
+ const input=document.getElementById('memoryText');
+ const value=input.value.trim();
+ if(!value)return;
+ memories.push(value);localStorage.setItem('hyojin_memory_data',JSON.stringify(memories));
+ input.value='';renderMemories();
+}
+function deleteMemory(i){
+ memories.splice(i,1);localStorage.setItem('hyojin_memory_data',JSON.stringify(memories));renderMemories();
+}
+function renderMemories(){
+ const box=document.getElementById('memoryList');
+ if(!memories.length){box.innerHTML='<div class="empty">> 아직 MEMORY DATA가 없습니다.</div>';return;}
+ box.innerHTML=memories.map((x,i)=>`<div class="memory-item"><span>${escapeHTML(x)}</span><button onclick="deleteMemory(${i})">DELETE</button></div>`).join('');
+}
+function addHashtag(btn){
+ const area=btn.parentElement;
+ const input=area.querySelector('.hashtag-input');
+ let value=input.value.trim();
+ if(!value)return;
+ if(!value.startsWith('#'))value='#'+value;
+ const tag=document.createElement('span');
+ tag.className='tag';tag.textContent=value;
+ tag.title='클릭해서 삭제';
+ tag.onclick=()=>tag.remove();
+ area.querySelector('.hashtag-list').appendChild(tag);
+ input.value='';
+}
+document.querySelectorAll('.editable-card input,.editable-card textarea').forEach(el=>{
+ const key='hyojin_edit_'+[...document.querySelectorAll('.editable-card input,.editable-card textarea')].indexOf(el);
+ el.value=localStorage.getItem(key)||'';
+ el.addEventListener('input',()=>localStorage.setItem(key,el.value));
+});
+renderMemories();
+const savedPhoto=localStorage.getItem('hyojin_profile_photo');
+if(savedPhoto)showProfilePhoto(savedPhoto);
+
+render();
+</script>
+</body>
+</html>
